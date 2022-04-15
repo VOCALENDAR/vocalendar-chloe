@@ -1,8 +1,4 @@
-import React from 'react';
 import './App.css';
-import FullCalendar, { EventAddArg, EventContentArg, EventInput } from '@fullcalendar/react';
-import dayGridPlugin from "@fullcalendar/daygrid"
-import timeGridPlugin from "@fullcalendar/timegrid"
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Grid, List, ListItem, ListItemButton, ListItemIcon } from '@mui/material';
 import { AddTask, Home } from '@mui/icons-material';
