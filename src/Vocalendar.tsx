@@ -1,11 +1,11 @@
-import React, { useRef, useState, VFC } from 'react';
+import React, { useRef, useState, FC } from 'react';
 import FullCalendar, { CustomButtonInput, EventInput, formatDate } from '@fullcalendar/react';
 import dayGridPlugin from "@fullcalendar/daygrid"
 import timeGridPlugin from "@fullcalendar/timegrid"
 import integrationPlugIn from "@fullcalendar/interaction"
 import { info } from 'console';
 
-const Vocalendar: VFC = () => {
+const Vocalendar: FC = () => {
 
   const [isHideLongEvent, setHideLongEvent] = useState(false)
 
