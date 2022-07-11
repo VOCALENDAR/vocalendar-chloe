@@ -1,7 +1,8 @@
-import FullCalendar, { CustomButtonInput, EventInput, formatDate, CalendarOptions } from '@fullcalendar/react';
+import FullCalendar, { formatDate, CalendarOptions } from '@fullcalendar/react';
 import dayGridPlugin from "@fullcalendar/daygrid"
 import timeGridPlugin from "@fullcalendar/timegrid"
 import integrationPlugIn from "@fullcalendar/interaction"
+import './fullcalendar.css'
 
 type Props = {
 
@@ -42,7 +43,7 @@ const Home: React.FC<Props> = (props) => {
           }
         }
       ]}
-      height={480}
+      height={640}
       eventSourceSuccess={props.eventSourceSuccess}
       eventSourceFailure={(error: any) => {
         console.log(error);
