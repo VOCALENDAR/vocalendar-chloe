@@ -1,12 +1,21 @@
-import { AddTask, Home, Notifications } from "@mui/icons-material"
-import { AppBar, Badge, Box, Container, Drawer, Grid, IconButton, Link, List, ListItem, ListItemButton, ListItemIcon, Menu, Paper, Stack, Toolbar, Typography } from "@mui/material"
+import { AddTask, Home, Notifications, SearchOutlined } from "@mui/icons-material"
+import { AppBar, Badge, Box, Container, Drawer, Grid, IconButton, InputAdornment, Link, List, ListItem, ListItemButton, ListItemIcon, Paper, Stack, TextField, Toolbar } from "@mui/material"
 import { NavLink, Route, Routes } from "react-router-dom"
-import HomeContainer from "../containers/templates/home"
 import MenuIcon from '@mui/icons-material/Menu'
 import { useState } from "react"
 import { grey } from "@mui/material/colors"
+import HomeContainer from "../../../containers/templates/home"
 
-const Layout: React.FC = () => {
+type Props = {
+  searchText?: string 
+  searchTextOnChangeHanldler?: React.ChangeEventHandler
+}
+
+/**
+ * VOCALENDAR Main Layout View
+ * @returns 
+ */
+const LayoutMain: React.FC<Props> = (props) => {
 
   const drawerWidth = 200
   const [isOpenDrawer, setDrawer] = useState(false)
@@ -25,7 +34,20 @@ const Layout: React.FC = () => {
         <Link href="/">
           <Box component="img" src="image/vocalendar-titlelogo-revc.png" sx={{ maxHeight: '40px', mr: 2}} />
         </Link>
-        <Badge badgeContent={4} color="secondary" sx={{marginLeft:'auto'}}>
+        <Box sx={{width:'60%', marginLeft:'auto'}}>
+          <TextField size="small" fullWidth variant="outlined" 
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchOutlined />
+                  </InputAdornment>
+                ),
+              }}
+              placeholder='検索'
+              onChange={props.searchTextOnChangeHanldler}
+          />
+        </Box>
+        <Badge badgeContent={4} color="secondary" sx={{ml:5}}>
           <Notifications sx={{ fontSize: '24px' }} />
         </Badge>
       </Toolbar>
@@ -95,7 +117,9 @@ const Layout: React.FC = () => {
         }}>
           {/* コンテンツ部分 */}
           <Routes>
-            <Route path='/' element={<HomeContainer />} />
+            <Route path='/' element={<HomeContainer 
+            searchText={props.searchText}
+            />} />
           </Routes>
         </Box>
       </Container>
@@ -105,4 +129,4 @@ const Layout: React.FC = () => {
   </>
 }
 
-export default Layout
+export default LayoutMain

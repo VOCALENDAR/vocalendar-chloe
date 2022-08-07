@@ -6,7 +6,7 @@ import './fullcalendar.css'
 
 type Props = {
 
-} & Required<Pick<CalendarOptions, 'customButtons' | 'eventSourceSuccess' | 'eventClick'>>
+} & Required<Pick<CalendarOptions, 'customButtons' | 'eventSourceSuccess' | 'eventClick' | 'eventSources'>>
 
 /**
  * VOCALENDAR HOMEのView Component
@@ -31,18 +31,7 @@ const Home: React.FC<Props> = (props) => {
       dayMaxEventRows={5}
       editable={false}
       //events = {(info, succesCallback, failureCallback)=>{}}
-      eventSources={[
-        {
-          url: 'core/events.json',
-          method: 'GET',
-          format: 'json',
-          startParam: 'startTime', // URLパラメータに入れる取得開始時間
-          endParam: 'endTime',
-          extraParams: {
-            order: '1'
-          }
-        }
-      ]}
+      eventSources={props.eventSources}
       height={640}
       eventSourceSuccess={props.eventSourceSuccess}
       eventSourceFailure={(error: any) => {

@@ -1,12 +1,12 @@
 import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom'
-import Layout from './layouts'
+import LayoutMainConteiner from './containers/layouts/main';
 //import './App.css';
 
 const App: React.FC = () => {
   return <BrowserRouter>
     <CssBaseline />
-    <Layout />
+    <LayoutMainConteiner />
   </BrowserRouter>
 }
 

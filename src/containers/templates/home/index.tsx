@@ -1,12 +1,17 @@
-import { CustomButtonInput, EventClickArg, EventInput } from "@fullcalendar/react"
+import { CustomButtonInput, EventClickArg, EventInput, EventSourceInput } from "@fullcalendar/react"
 import { useState } from "react"
 import Home from "../../../components/templates/home"
+
+
+type Props = {
+  searchText?: string
+}
 
 /**
  * VOCALENDAR HOMEのコンテナ
  * @returns 
  */
-const HomeContainer: React.FC = () => {
+const HomeContainer: React.FC<Props>= (props) => {
 
   const [isHideLongEvent, setHideLongEvent] = useState(false)
 
@@ -43,10 +48,28 @@ const HomeContainer: React.FC = () => {
 
   }
 
+  const eventSources = (searchText?:string):EventSourceInput[] =>{
+
+    const serchConditon = searchText ? {q:searchText}: {}
+
+    return [
+    {
+      url: 'core/events.json',
+      method: 'GET',
+      format: 'json',
+      startParam: 'startTime', // URLパラメータに入れる取得開始時間
+      endParam: 'endTime',
+      extraParams: {
+        order: '1'
+      } && serchConditon
+    }
+  ]}
+
   return <Home
   eventSourceSuccess={eventSourceSuccess}
   customButtons={{customButton}}
   eventClick={(e:EventClickArg)=>{}}
+  eventSources={eventSources(props.searchText)}
   />
 }
 
