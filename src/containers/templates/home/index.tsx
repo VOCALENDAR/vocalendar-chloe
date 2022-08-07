@@ -1,10 +1,14 @@
 import { CustomButtonInput, EventClickArg, EventInput, EventSourceInput } from "@fullcalendar/react"
 import { useState } from "react"
+import { Event } from "../../../components/layouts/main"
 import Home from "../../../components/templates/home"
 
 
 type Props = {
   searchText?: string
+  setShowEvent:(isShow:boolean) => void
+  setShowEventData: (data:Event) => void
+
 }
 
 /**
@@ -14,6 +18,22 @@ type Props = {
 const HomeContainer: React.FC<Props>= (props) => {
 
   const [isHideLongEvent, setHideLongEvent] = useState(false)
+
+  // API発行の設定
+  const eventSources = (searchText?:string):EventSourceInput[] =>{
+    const serchConditon = searchText ? {q:searchText}: {}
+    return [
+    {
+      url: 'core/events.json',
+      method: 'GET',
+      format: 'json',
+      startParam: 'startTime', // URLパラメータに入れる取得開始時間
+      endParam: 'endTime',
+      extraParams: {
+        order: '1'
+      } && serchConditon
+    }
+  ]}
 
   // Vocalendar Coreからイベントを取得してきた時にCoreとFullcalendarのミスマッチ等を吸収する
   const eventSourceSuccess = (events: EventInput[]) => {
@@ -45,30 +65,19 @@ const HomeContainer: React.FC<Props>= (props) => {
     click: (event) => {
       setHideLongEvent(!isHideLongEvent)
     }
-
   }
 
-  const eventSources = (searchText?:string):EventSourceInput[] =>{
+  const eventClick= (event:EventClickArg)=>{
 
-    const serchConditon = searchText ? {q:searchText}: {}
+    props.setShowEvent(true)
+    props.setShowEventData({title:event.event.title, description:""})
+  }
 
-    return [
-    {
-      url: 'core/events.json',
-      method: 'GET',
-      format: 'json',
-      startParam: 'startTime', // URLパラメータに入れる取得開始時間
-      endParam: 'endTime',
-      extraParams: {
-        order: '1'
-      } && serchConditon
-    }
-  ]}
 
   return <Home
   eventSourceSuccess={eventSourceSuccess}
   customButtons={{customButton}}
-  eventClick={(e:EventClickArg)=>{}}
+  eventClick={eventClick}
   eventSources={eventSources(props.searchText)}
   />
 }

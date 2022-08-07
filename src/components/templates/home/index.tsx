@@ -5,7 +5,6 @@ import integrationPlugIn from "@fullcalendar/interaction"
 import './fullcalendar.css'
 
 type Props = {
-
 } & Required<Pick<CalendarOptions, 'customButtons' | 'eventSourceSuccess' | 'eventClick' | 'eventSources'>>
 
 /**
@@ -15,6 +14,7 @@ type Props = {
  */
 const Home: React.FC<Props> = (props) => {
 
+  // TODO FullcalendarがAPIを2回発行するのでなんとかしたい
   return <div className="vocalendar-main">
     <FullCalendar
       plugins={[dayGridPlugin, timeGridPlugin, integrationPlugIn]}
