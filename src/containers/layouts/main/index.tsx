@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { useDebounce } from "react-use"
 import LayoutMain, { Event } from "../../../components/layouts/main"
 
@@ -23,13 +23,16 @@ import LayoutMain, { Event } from "../../../components/layouts/main"
     setDebounceText(searchText)
   },1000,[searchText])
 
-  const searchTextOnChangeHanldler:React.ChangeEventHandler<HTMLInputElement> = (event) =>{
-    setSearchText(event.currentTarget.value ?? '')
-  } 
+  const searchTextOnChangeHanldler:React.ChangeEventHandler<HTMLInputElement> = React.useCallback(
+    (event) =>{
+      setSearchText(event.currentTarget.value ?? '')
+    } 
+,[]      
+  )
 
-  const setShowEventRapper = (isShow:boolean)=>{
+  const setShowEventRapper = React.useCallback((isShow:boolean)=>{
     setShowEvent(isShow)
-  }
+  },[])
 
   return <LayoutMain
   searchText={debounceText}
@@ -37,7 +40,7 @@ import LayoutMain, { Event } from "../../../components/layouts/main"
   isShowEvent={isShowEvent}
   setShowEvent={setShowEventRapper}
   showEventData={eventData}
-  setShowEventData={(event)=>{setEventData(event)}}
+  setShowEventData={React.useCallback((event)=>{setEventData(event)},[])}
   />
 }
 

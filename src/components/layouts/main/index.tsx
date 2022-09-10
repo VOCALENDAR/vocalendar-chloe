@@ -5,6 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { useState } from "react"
 import { grey } from "@mui/material/colors"
 import HomeContainer from "../../../containers/templates/home"
+import React from "react"
 
 export type Event = {
   title: string
@@ -23,7 +24,7 @@ type Props = {
  * VOCALENDAR Main Layout View
  * @returns 
  */
-const LayoutMain: React.FC<Props> = (props) => {
+const LayoutMain: React.FC<Props> = React.memo((props) => {
 
   const drawerWidth = 200
   const [isOpenDrawer, setDrawer] = useState(false)
@@ -174,6 +175,6 @@ const LayoutMain: React.FC<Props> = (props) => {
       </Box>
     </Stack>
   </>
-}
+})
 
 export default LayoutMain
