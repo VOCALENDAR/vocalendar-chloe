@@ -1,5 +1,5 @@
 import { CustomButtonInput, EventClickArg, EventInput, EventSourceInput } from "@fullcalendar/react"
-import { useState } from "react"
+import React, { useState } from "react"
 import { Event } from "../../../components/layouts/main"
 import Home from "../../../components/templates/home"
 
@@ -15,7 +15,7 @@ type Props = {
  * VOCALENDAR HOMEのコンテナ
  * @returns 
  */
-const HomeContainer: React.FC<Props>= (props) => {
+const HomeContainer: React.FC<Props>= React.memo((props) => {
 
   const [isHideLongEvent, setHideLongEvent] = useState(false)
 
@@ -80,6 +80,6 @@ const HomeContainer: React.FC<Props>= (props) => {
   eventClick={eventClick}
   eventSources={eventSources(props.searchText)}
   />
-}
+})
 
 export default HomeContainer
