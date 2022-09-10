@@ -23,7 +23,7 @@ const Home: React.FC<Props> = (props) => {
       headerToolbar={{
         left: 'prev,next today',
         center: 'title',
-        right: 'customButton dayGridMonth,dayGridWeek,timeGridWeek,timeGridDay'
+        right: 'customButton dayGridMonth,timeGridWeek,timeGridDay'
       }}
       navLinks={true}
       businessHours={true}
