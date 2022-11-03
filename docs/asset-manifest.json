@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/vocalendar-chloe/static/css/main.0ed05fdc.css",
+    "main.js": "/vocalendar-chloe/static/js/main.6f1c1591.js",
+    "static/js/787.29572473.chunk.js": "/vocalendar-chloe/static/js/787.29572473.chunk.js",
+    "index.html": "/vocalendar-chloe/index.html",
+    "main.0ed05fdc.css.map": "/vocalendar-chloe/static/css/main.0ed05fdc.css.map",
+    "main.6f1c1591.js.map": "/vocalendar-chloe/static/js/main.6f1c1591.js.map",
+    "787.29572473.chunk.js.map": "/vocalendar-chloe/static/js/787.29572473.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0ed05fdc.css",
+    "static/js/main.6f1c1591.js"
+  ]
+}
