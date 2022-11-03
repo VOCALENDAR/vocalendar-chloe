@@ -30,8 +30,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "rm": "rm -rf docs",
+    "mv": "mv build docs",
+    "git": "git add . && git commit && git push origin public",
+    "deploy": "npm run rm && npm run build && npm run mv && npm run git"
   },
+  "homepage": "https://VOCALENDAR.github.io/vocalendar-chloe/",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -55,4 +60,5 @@
     "npm": "8.16.0"
   },
   "proxy": "https://vocalendar.jp/"
+
 }
