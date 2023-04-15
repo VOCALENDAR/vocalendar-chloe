@@ -162,7 +162,7 @@ const LayoutMain: React.FC<Props> = React.memo((props) => {
             <Typography sx={{fontWeight:'bold'}}>詳細</Typography>
           </div>
           <div>
-          <Typography>だみー</Typography>
+          <Typography>{props.showEventData.description}</Typography>
           </div>
         </Paper>
 

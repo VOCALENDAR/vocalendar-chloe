@@ -69,8 +69,11 @@ const HomeContainer: React.FC<Props>= React.memo((props) => {
 
   const eventClick= (event:EventClickArg)=>{
 
+    event.event.extendedProps.description
+
+    
     props.setShowEvent(true)
-    props.setShowEventData({title:event.event.title, description:""})
+    props.setShowEventData({title:event.event.title, description:event.event.extendedProps.description})
   }
 
 
