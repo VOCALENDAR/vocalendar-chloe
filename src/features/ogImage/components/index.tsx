@@ -14,6 +14,6 @@ const OgImageComp: React.FC<Props>= React.memo((props) => {
 
 
 
-  return <></>
+  return <><Image ></Image></>
 })
 export default OgImageComp
