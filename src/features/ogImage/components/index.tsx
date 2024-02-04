@@ -2,7 +2,7 @@ import { error } from "console"
 import React from "react"
 
 type Props = {
-  imageURL:string
+  imageURL : string | undefined
 }
 
 /**
@@ -14,6 +14,6 @@ const OgImageComp: React.FC<Props>= React.memo((props) => {
 
 
 
-  return <><Image ></Image></>
+  return <><image></image></>
 })
 export default OgImageComp

@@ -1,4 +1,5 @@
-import FullCalendar, { formatDate, CalendarOptions } from '@fullcalendar/react';
+import FullCalendar from '@fullcalendar/react';
+import { CalendarOptions } from '@fullcalendar/core'
 import dayGridPlugin from "@fullcalendar/daygrid"
 import timeGridPlugin from "@fullcalendar/timegrid"
 import integrationPlugIn from "@fullcalendar/interaction"
