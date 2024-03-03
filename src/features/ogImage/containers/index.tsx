@@ -1,5 +1,5 @@
 import { error } from "console"
-import React, { useCallback } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import OgImageComp from "../components"
 import {JSDOM} from "jsdom"
 
@@ -13,9 +13,14 @@ type Props = {
  */
 const OgImage:React.FC<Props> =  (props) => {
 
-  // TODO awaitをasyncの中で使わなければいけないが、React.FCをasync指定できなくてどうすればいいか謎。
-  const imageURL = "" // await getImageURL(props.siteURL)
-  return <OgImageComp imageURL={imageURL}></OgImageComp>
+  const [imageUrl, setImageUrl] = useState<string>()
+  useEffect(()=>{
+    (async ()=>{
+      setImageUrl(await getImageURL(props.siteURL))
+    })()
+  },[props.siteURL])
+
+  return <OgImageComp imageURL={imageUrl}></OgImageComp>
 }
 const getImageURL = async (siteURL:string = "www.google.com") => {
 
