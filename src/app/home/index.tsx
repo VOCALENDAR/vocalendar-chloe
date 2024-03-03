@@ -1,7 +1,7 @@
 import { CustomButtonInput, EventClickArg, EventInput, EventSourceInput } from "@fullcalendar/core"
 import React, { useState } from "react"
-import { Event } from "../../../components/layouts/main"
-import Home from "../../../components/templates/home"
+import { Event } from "../../_layout/component"
+import Home from "./component"
 
 
 type Props = {
@@ -69,11 +69,8 @@ const HomeContainer: React.FC<Props>= React.memo((props) => {
 
   const eventClick= (event:EventClickArg)=>{
 
-    event.event.extendedProps.description
-
-    
     props.setShowEvent(true)
-    props.setShowEventData({title:event.event.title, description:event.event.extendedProps.description})
+    props.setShowEventData({title:event.event.title, description:""})
   }
 
 

@@ -11,9 +11,6 @@ type Props = {
  */
 const OgImageComp: React.FC<Props>= React.memo((props) => {
 
-
-
-
-  return <><image></image></>
+  return props.imageURL ? <><img src={props.imageURL} /></> : <></>
 })
 export default OgImageComp

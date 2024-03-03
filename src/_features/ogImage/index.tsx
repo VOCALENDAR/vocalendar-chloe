@@ -1,10 +1,10 @@
 import { error } from "console"
 import React, { useCallback, useEffect, useState } from "react"
-import OgImageComp from "../components"
+import OgImageComp from "./component"
 import {JSDOM} from "jsdom"
 
 type Props = {
-  siteURL:string
+  siteURL : string
 }
 
 /**
@@ -22,8 +22,9 @@ const OgImage:React.FC<Props> =  (props) => {
 
   return <OgImageComp imageURL={imageUrl}></OgImageComp>
 }
-const getImageURL = async (siteURL:string = "www.google.com") => {
+const getImageURL = async (siteURL:string) => {
 
+  console.log(siteURL)
   const url = await fetch(siteURL)
   .then(async response => {
     if(!response.ok) {

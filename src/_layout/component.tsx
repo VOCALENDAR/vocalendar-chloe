@@ -4,7 +4,7 @@ import { NavLink, Route, Routes } from "react-router-dom"
 import MenuIcon from '@mui/icons-material/Menu'
 import { useState } from "react"
 import { grey } from "@mui/material/colors"
-import HomeContainer from "../../../containers/templates/home"
+import HomeContainer from "../app/home"
 import React from "react"
 
 export type Event = {
@@ -134,7 +134,7 @@ const LayoutMain: React.FC<Props> = React.memo((props) => {
           </Routes>
         </Box>
       </Container>
-      <Drawer anchor="right"
+      {/* <Drawer anchor="right"
         open={props.isShowEvent}
         onClose={(event, reason) => { props.setShowEvent(!props.isShowEvent) }}
         sx={{ width: `${drawerWidth}px` }}
@@ -162,11 +162,11 @@ const LayoutMain: React.FC<Props> = React.memo((props) => {
             <Typography sx={{fontWeight:'bold'}}>詳細</Typography>
           </div>
           <div>
-          <Typography>{props.showEventData.description}</Typography>
+          <Typography>だみー</Typography>
           </div>
         </Paper>
 
-      </Drawer>
+      </Drawer> */}
       <Box sx={{
         display: { xs: 'none', lg: 'block' }, width: `${drawerWidth}px`, m: 0, p: 0,
         backgroundImage: 'image\vocalendar-elrowa-mikuoriginal.png'

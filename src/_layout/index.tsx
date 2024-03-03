@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDebounce } from "react-use"
-import LayoutMain, { Event } from "../../../components/layouts/main"
+import LayoutMain, { Event } from "./component"
 
 
 /**
