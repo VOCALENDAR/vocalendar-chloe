@@ -18,7 +18,8 @@ type Props = {
 const Home: React.FC<Props> = (props) => {
 
   // TODO FullcalendarがAPIを2回発行するのでなんとかしたい
-  return <><div className="vocalendar-main">
+  return <>
+  <div className="vocalendar-main">
     <FullCalendar
       plugins={[dayGridPlugin, timeGridPlugin, integrationPlugIn]}
       initialView="dayGridMonth"
