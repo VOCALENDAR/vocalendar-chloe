@@ -6,6 +6,7 @@ import { useState } from "react"
 import { grey } from "@mui/material/colors"
 import HomeContainer from "../app/home"
 import React from "react"
+import OgImage from "../_features/ogImage"
 
 export type Event = {
   title: string
@@ -134,12 +135,13 @@ const LayoutMain: React.FC<Props> = React.memo((props) => {
           </Routes>
         </Box>
       </Container>
-      {/* <Drawer anchor="right"
+      <Drawer anchor="right"
         open={props.isShowEvent}
         onClose={(event, reason) => { props.setShowEvent(!props.isShowEvent) }}
         sx={{ width: `${drawerWidth}px` }}
       >
         <Paper>
+        <OgImage siteURL={'https://piapro.net/miku16thbd/'}></OgImage>
         <div>
             <Typography sx={{fontWeight:'bold'}}>イベント</Typography>
           </div>
@@ -166,7 +168,7 @@ const LayoutMain: React.FC<Props> = React.memo((props) => {
           </div>
         </Paper>
 
-      </Drawer> */}
+      </Drawer>
       <Box sx={{
         display: { xs: 'none', lg: 'block' }, width: `${drawerWidth}px`, m: 0, p: 0,
         backgroundImage: 'image\vocalendar-elrowa-mikuoriginal.png'

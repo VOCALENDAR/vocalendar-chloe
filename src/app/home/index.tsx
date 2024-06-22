@@ -24,7 +24,7 @@ const HomeContainer: React.FC<Props>= React.memo((props) => {
     const serchConditon = searchText ? {q:searchText}: {}
     return [
     {
-      url: 'core/events.json',
+      url: '/core/events.json',
       method: 'GET',
       format: 'json',
       startParam: 'startTime', // URLパラメータに入れる取得開始時間

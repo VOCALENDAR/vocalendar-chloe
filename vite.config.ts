@@ -9,5 +9,15 @@ export default defineConfig({
         { find: '@', replacement: '/src' },
       ],
     },
-    plugins: [react()]
+    plugins: [react()],
+    server: {
+      proxy: {
+        "/core": {
+          // 動いているんだけど、サーバーがIPv6に対応していないっぽい。（curl www.google.comは帰ってくるので）
+          target:'https://vocalendar.jp/',
+          changeOrigin: true
+        }
+      }
+    }
+    
   })

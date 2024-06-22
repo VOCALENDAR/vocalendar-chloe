@@ -1,7 +1,5 @@
-import { error } from "console"
-import React, { useCallback, useEffect, useState } from "react"
+import React, {useEffect, useState } from "react"
 import OgImageComp from "./component"
-import {JSDOM} from "jsdom"
 
 type Props = {
   siteURL : string
@@ -25,22 +23,22 @@ const OgImage:React.FC<Props> =  (props) => {
 const getImageURL = async (siteURL:string) => {
 
   console.log(siteURL)
-  // COLSではじかれる・・・
-  const url = await fetch(siteURL)
-  .then(async response => {
+  // Clientから他のURLはCOLSではじかれるのでCOLS Proxyを利用
+  const url = await fetch(`https://corsproxy.io/?${siteURL}`)
+  .then(async (response) => {
     if(!response.ok) {
       throw new Error(response.statusText)
     }
-    // const dom = JSDOM.fragment(await response.text())
-    // const ogps = Array.from(dom.querySelectorAll("head > meta")).filter(n=>n.hasAttribute("property"))
-    //             .reduce<Map<string,string>>((previous: Map<string,string>, current: Element) => {
-    //               const property = current.getAttribute("property")?.trim()
-    //               if (property){
-    //                 previous.set(property, current.getAttribute("content") ?? "")
-    //               }
-    //               return previous
-    //             }, new Map<string,string>)
-    // return ogps.get("og:image")               
+    const document = new DOMParser().parseFromString(await response.text(), 'text/html')
+    const ogps = Array.from(document.querySelectorAll("head > meta")).filter(n=>n.hasAttribute("property"))
+                 .reduce<Map<string,string>>((previous: Map<string,string>, current: Element) => {
+                   const property = current.getAttribute("property")?.trim()
+                   if (property){
+                     previous.set(property, current.getAttribute("content") ?? "")
+                   }
+                   return previous
+                 }, new Map<string,string>)
+     return ogps.get("og:image")               
     return ""
   })
   return url
