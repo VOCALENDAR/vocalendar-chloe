@@ -27,6 +27,7 @@ export default ts.config({
   },
   rules: {
     "no-console": "warn",
+    "react/prop-types": "off"
   },
   ignores: ["build/*","node_modules/*", "vite.config.js"]
 })
