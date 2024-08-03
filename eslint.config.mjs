@@ -2,6 +2,7 @@ import globals from "globals";
 import eslint from "@eslint/js";
 import ts from "typescript-eslint";
 import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
+import pluginReactJSXRuntime from "eslint-plugin-react/configs/jsx-runtime.js";
 import { fixupConfigRules } from "@eslint/compat";
 
 export default ts.config({
@@ -10,6 +11,7 @@ export default ts.config({
     eslint.configs.recommended,
     ...ts.configs.recommended,
     ...fixupConfigRules(pluginReactConfig),
+    ...fixupConfigRules(pluginReactJSXRuntime),
   ],
   languageOptions: { 
     parserOptions: { ecmaFeatures: { jsx: true } },
