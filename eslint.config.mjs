@@ -27,7 +27,16 @@ export default ts.config({
   },
   rules: {
     "no-console": "warn",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_"
+      }
+    ]
   },
   ignores: ["build/*","node_modules/*", "vite.config.js"]
 })

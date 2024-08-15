@@ -25,7 +25,7 @@ type Props = {
  * VOCALENDAR Main Layout View
  * @returns 
  */
-const LayoutMain: React.FC<Props> = React.memo((props) => {
+const LayoutMain: React.FC<Props> = React.memo(function LayoutMainInner(props) {
 
   const drawerWidth = 200
   const [isOpenDrawer, setDrawer] = useState(false)
@@ -38,7 +38,7 @@ const LayoutMain: React.FC<Props> = React.memo((props) => {
       sx={{ boxShadow: 3, backgroundColor: 'white' }}
     >
       <Toolbar style={{ minHeight: '50px', display: 'flex' }}>
-        <IconButton onClick={(event) => { setDrawer(!isOpenDrawer) }} sx={{ display: { lg: 'none' } }}>
+        <IconButton onClick={(_event) => { setDrawer(!isOpenDrawer) }} sx={{ display: { lg: 'none' } }}>
           <MenuIcon />
         </IconButton>
         <Link href="/">
@@ -64,7 +64,7 @@ const LayoutMain: React.FC<Props> = React.memo((props) => {
     </AppBar>
     <Drawer anchor="left"
       open={isOpenDrawer}
-      onClose={(event, reason) => { setDrawer(!isOpenDrawer) }}
+      onClose={(_event, _reason) => { setDrawer(!isOpenDrawer) }}
       sx={{ width: `${drawerWidth}px` }}
     >
       <Grid container >
@@ -137,7 +137,7 @@ const LayoutMain: React.FC<Props> = React.memo((props) => {
       </Container>
       <Drawer anchor="right"
         open={props.isShowEvent}
-        onClose={(event, reason) => { props.setShowEvent(!props.isShowEvent) }}
+        onClose={(_event, _reason) => { props.setShowEvent(!props.isShowEvent) }}
         sx={{ width: `${drawerWidth}px` }}
       >
         <Paper>

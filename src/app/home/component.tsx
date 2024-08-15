@@ -38,7 +38,7 @@ const Home: React.FC<Props> = (props) => {
       eventSources={props.eventSources}
       height={640}
       eventSourceSuccess={props.eventSourceSuccess}
-      eventSourceFailure={(error: any) => {
+      eventSourceFailure={(error) => {
         console.log(error);
       }}
       eventTimeFormat={{

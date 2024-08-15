@@ -15,7 +15,7 @@ type Props = {
  * VOCALENDAR HOMEのコンテナ
  * @returns 
  */
-const HomeContainer: React.FC<Props>= React.memo((props) => {
+const HomeContainer: React.FC<Props>= React.memo( function HomeContainerInner(props) {
 
   const [isHideLongEvent, setHideLongEvent] = useState(false)
 
@@ -30,8 +30,9 @@ const HomeContainer: React.FC<Props>= React.memo((props) => {
       startParam: 'startTime', // URLパラメータに入れる取得開始時間
       endParam: 'endTime',
       extraParams: {
+        ...serchConditon,
         order: '1'
-      } && serchConditon
+      }
     }
   ]}
 
