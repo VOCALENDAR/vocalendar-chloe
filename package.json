@@ -6,9 +6,12 @@
     "start": "vite",
     "build": "tsc --noEmit && vite build",
     "serve": "vite preview",
+    "format": "prettier --write",
     "lint": "eslint",
-    "format": "prettier --write '**/*.{js,mjs,jsx,ts,tsx,html,css}'",
-    "test": "react-scripts test"
+    "type": "tsc --noEmit",
+    "test": "react-scripts test",
+    "lefthook": "lefthook install",
+    "postinstall": "npm run lefthook"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -43,6 +46,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.35.0",
     "globals": "^15.8.0",
+    "lefthook": "^1.7.14",
     "prettier": "^3.3.3",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.0",

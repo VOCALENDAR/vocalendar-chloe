@@ -17,7 +17,7 @@ const LayoutMainConteiner: React.FC = () => {
   // イベントの遅延発火
   // TODO 遅延発火は上手くいっているけど、ReactがFullcalendarをイベントで書き換えるので意味がないｗ
   const [debounceText, setDebounceText] = useState('')
-  const [isReady, cancel] = useDebounce(
+  const [_isReady, _cancel] = useDebounce(
     () => {
       setDebounceText(searchText)
     },

@@ -61,7 +61,7 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(pr
    */
   const customButton: CustomButtonInput = {
     text: isHideLongEvent ? 'ShowDayEvent' : 'HideDayEvent',
-    click: event => {
+    click: _event => {
       setHideLongEvent(!isHideLongEvent)
     },
   }

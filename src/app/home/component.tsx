@@ -4,12 +4,9 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import integrationPlugIn from '@fullcalendar/interaction'
 import './fullcalendar.css'
-import { Drawer, Paper, Typography } from '@mui/material'
-import OgImage from '../../_features/ogImage'
 
-type Props = {} & Required<
-  Pick<CalendarOptions, 'customButtons' | 'eventSourceSuccess' | 'eventClick' | 'eventSources'>
->
+type Props = object &
+  Required<Pick<CalendarOptions, 'customButtons' | 'eventSourceSuccess' | 'eventClick' | 'eventSources'>>
 
 /**
  * VOCALENDAR HOMEのView Component
