@@ -2,6 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "ms-ceintl.vscode-language-pack-ja",
-    "mhutchie.git-graph"
+    "mhutchie.git-graph",
+    "esbenp.prettier-vscode"
   ]
 }
