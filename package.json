@@ -2,6 +2,7 @@
   "name": "vocalendar-chloe",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "vite",
     "build": "tsc --noEmit && vite build",
