@@ -18,9 +18,11 @@ pre-commit:
     front-format:
       # glob: '*.{js,ts,jsx,tsx}'
       run: npm run format {staged_files}
+      stage_fixed: true
     front-lint:
       # glob: '*.{js,ts,jsx,tsx}'
       run: npm run lint --fix {staged_files}
+      stage_fixed: true
     front-type:
       # glob: '*.{js,ts,jsx,tsx}'
       run: npm run type
