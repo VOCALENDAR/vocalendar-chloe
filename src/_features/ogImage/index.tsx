@@ -22,7 +22,7 @@ const OgImage: React.FC<Props> = props => {
 const getImageURL = async (siteURL: string) => {
   console.log(siteURL)
   // Clientから他のURLはCOLSではじかれるのでCOLS Proxyを利用
-  const url = await fetch(`https://corsproxy.io/?${siteURL}`).then(async response => {
+  const url = await fetch(`https://corsproxy.io/?url=${siteURL}`).then(async response => {
     if (!response.ok) {
       throw new Error(response.statusText)
     }
