@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useCallback, useState } from 'react'
+import React, { ChangeEventHandler, useCallback, useEffect, useState } from 'react'
 import { useDebounce } from 'react-use'
 import SearchBoxCompornent from './component'
 import { useSearchTextContext } from '../../_provider/searchTextContext'
@@ -31,9 +31,12 @@ const SearchBox: React.FC<Props> = props => {
     [text]
   )
 
+  // コンポーネントレンダリング中に他のコンポーネントの値を書き換えるとエラーになる対応
+  // 参考：https://ja.stackoverflow.com/questions/83569
   const { setSearchText } = useSearchTextContext()
-  console.log(debounceText)
-  setSearchText(debounceText)
+  useEffect(() => {
+    setSearchText(debounceText)
+  }, [debounceText, useSearchTextContext])
 
   return <SearchBoxCompornent onChangeHandler={onChangeHandler} {...props.textFieldProps} />
 }
