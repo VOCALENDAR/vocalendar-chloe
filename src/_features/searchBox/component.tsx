@@ -1,5 +1,5 @@
 import { SearchOutlined } from '@mui/icons-material'
-import { Box, InputAdornment, TextField, TextFieldProps } from '@mui/material'
+import { InputAdornment, TextField, TextFieldProps } from '@mui/material'
 import React, { ChangeEventHandler } from 'react'
 
 type Props = {
@@ -14,23 +14,21 @@ type Props = {
 const SearchBoxCompornent: React.FC<Props> = React.memo(function SearchBoxInner(props) {
   return (
     <>
-      <Box sx={{ width: '60%', marginLeft: 'auto' }}>
-        <TextField
-          size="small"
-          fullWidth
-          variant="outlined"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchOutlined />
-              </InputAdornment>
-            ),
-          }}
-          placeholder="検索"
-          onChange={props.onChangeHandler}
-          {...props.textFieldProps}
-        />
-      </Box>
+      <TextField
+        size="small"
+        fullWidth
+        variant="outlined"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchOutlined />
+            </InputAdornment>
+          ),
+        }}
+        placeholder="検索"
+        onChange={props.onChangeHandler}
+        {...props.textFieldProps}
+      />
     </>
   )
 })

@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from 'react'
 
 interface SearchTextContextValue {
-  text: string
-  setText: (text: string) => void
+  searchText: string
+  setSearchText: (text: string) => void
 }
 
 const SearchTextContext = createContext<SearchTextContextValue | null>(null)
@@ -13,8 +13,8 @@ const SearchTextContext = createContext<SearchTextContextValue | null>(null)
  * @returns
  */
 export function SearchTextProvider({ children }: { children: React.ReactNode }) {
-  const [text, setText] = useState<string>('')
-  return <SearchTextContext.Provider value={{ text, setText }}>{children}</SearchTextContext.Provider>
+  const [searchText, setSearchText] = useState<string>('')
+  return <SearchTextContext.Provider value={{ searchText, setSearchText }}>{children}</SearchTextContext.Provider>
 }
 
 /**
@@ -25,5 +25,5 @@ export const useSearchTextContext = (): SearchTextContextValue => {
   const ctx = useContext(SearchTextContext)
   if (!ctx) throw new Error('useUser must be used within a SearchTextProvider')
 
-  return { text: ctx.text, setText: ctx.setText }
+  return { ...ctx }
 }

@@ -2,9 +2,9 @@ import { CustomButtonInput, EventClickArg, EventInput, EventSourceInput } from '
 import React, { useState } from 'react'
 import { Event } from '../../_layout/component'
 import Home from './component'
+import { useSearchTextContext } from '../../_provider/searchTextContext'
 
 type Props = {
-  searchText?: string
   setShowEvent: (isShow: boolean) => void
   setShowEventData: (data: Event) => void
 }
@@ -71,12 +71,14 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(pr
     props.setShowEventData({ title: event.event.title, description: '' })
   }
 
+  const { searchText } = useSearchTextContext()
+
   return (
     <Home
       eventSourceSuccess={eventSourceSuccess}
       customButtons={{ customButton }}
       eventClick={eventClick}
-      eventSources={eventSources(props.searchText)}
+      eventSources={eventSources(searchText)}
     />
   )
 })

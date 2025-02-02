@@ -14,9 +14,9 @@ type Props = {
  */
 const SearchBox: React.FC<Props> = props => {
   const [text, setText] = useState('')
-  const onChangeHandler = useCallback<ChangeEventHandler>(
+  const onChangeHandler = useCallback<ChangeEventHandler<HTMLInputElement>>(
     event => {
-      setText(event.currentTarget.textContent ?? '')
+      setText(event.target.value ?? '')
     },
     [setText]
   )
@@ -31,7 +31,8 @@ const SearchBox: React.FC<Props> = props => {
     [text]
   )
 
-  const { text: _searchText, setText: setSearchText } = useSearchTextContext()
+  const { setSearchText } = useSearchTextContext()
+  console.log(debounceText)
   setSearchText(debounceText)
 
   return <SearchBoxCompornent onChangeHandler={onChangeHandler} {...props.textFieldProps} />

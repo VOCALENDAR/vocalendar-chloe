@@ -1,4 +1,4 @@
-import { AddTask, Home, Notifications, SearchOutlined } from '@mui/icons-material'
+import { AddTask, Home, Notifications } from '@mui/icons-material'
 import {
   AppBar,
   Badge,
@@ -7,7 +7,6 @@ import {
   Drawer,
   Grid,
   IconButton,
-  InputAdornment,
   Link,
   List,
   ListItem,
@@ -15,7 +14,6 @@ import {
   ListItemIcon,
   Paper,
   Stack,
-  TextField,
   Toolbar,
   Typography,
 } from '@mui/material'
@@ -26,14 +24,13 @@ import { grey } from '@mui/material/colors'
 import HomeContainer from '../app/home'
 import React from 'react'
 import OgImage from '../_features/ogImage'
+import SearchBox from '../_features/searchBox'
 
 export type Event = {
   title: string
   description: string
 }
 type Props = {
-  searchText?: string
-  searchTextOnChangeHanldler?: React.ChangeEventHandler
   isShowEvent: boolean
   setShowEvent: (isShow: boolean) => void
   showEventData: Event
@@ -64,20 +61,7 @@ const LayoutMain: React.FC<Props> = React.memo(function LayoutMainInner(props) {
             <Box component="img" src="image/vocalendar-titlelogo-revc.png" sx={{ maxHeight: '40px', mr: 2 }} />
           </Link>
           <Box sx={{ width: '60%', marginLeft: 'auto' }}>
-            <TextField
-              size="small"
-              fullWidth
-              variant="outlined"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchOutlined />
-                  </InputAdornment>
-                ),
-              }}
-              placeholder="検索"
-              onChange={props.searchTextOnChangeHanldler}
-            />
+            <SearchBox />
           </Box>
           <Badge badgeContent={4} color="secondary" sx={{ ml: 5 }}>
             <Notifications sx={{ fontSize: '24px' }} />
@@ -169,13 +153,7 @@ const LayoutMain: React.FC<Props> = React.memo(function LayoutMainInner(props) {
             <Routes>
               <Route
                 path="/"
-                element={
-                  <HomeContainer
-                    searchText={props.searchText}
-                    setShowEvent={props.setShowEvent}
-                    setShowEventData={props.setShowEventData}
-                  />
-                }
+                element={<HomeContainer setShowEvent={props.setShowEvent} setShowEventData={props.setShowEventData} />}
               />
             </Routes>
           </Box>
