@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import React from 'react'
 
 type Props = {
@@ -10,9 +11,13 @@ type Props = {
  */
 const OgImageComp: React.FC<Props> = React.memo(function OgImageCompInner(props) {
   return props.imageURL ? (
-    <>
-      <img src={props.imageURL} width={'300px'} />
-    </>
+    <Box
+      sx={{
+        textAlign: 'center',
+      }}
+    >
+      <img src={props.imageURL} />
+    </Box>
   ) : (
     <></>
   )

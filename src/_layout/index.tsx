@@ -6,7 +6,7 @@ import LayoutMain, { Event } from './component'
  * @returns
  */
 const LayoutMainConteiner: React.FC = () => {
-  const initEvent: Event = { title: '', description: '' }
+  const initEvent: Event = { title: '', description: '', start: '', location: '' }
   const [eventData, setEventData] = useState(initEvent)
   const [isShowEvent, setShowEvent] = useState(false)
 

@@ -59,16 +59,31 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(pr
   /**
    * 期間イベントを除外するUIの定義
    */
-  const customButton: CustomButtonInput = {
+  const showDayEvent: CustomButtonInput = {
     text: isHideLongEvent ? 'ShowDayEvent' : 'HideDayEvent',
     click: _event => {
       setHideLongEvent(!isHideLongEvent)
     },
   }
 
+  /**
+   * リフレッシュボタン
+   */
+  const refreshEvent: CustomButtonInput = {
+    text: 'reflesh',
+    click: _event => {
+      // setHideLongEvent(!isHideLongEvent)
+    },
+  }
+
   const eventClick = (event: EventClickArg) => {
     props.setShowEvent(true)
-    props.setShowEventData({ title: event.event.title, description: '' })
+    props.setShowEventData({
+      title: event.event.title,
+      start: event.event.start?.toISOString() ?? '',
+      location: event.event.extendedProps.location,
+      description: event.event.extendedProps.description,
+    })
   }
 
   const { searchText } = useSearchTextContext()
@@ -76,7 +91,7 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(pr
   return (
     <Home
       eventSourceSuccess={eventSourceSuccess}
-      customButtons={{ customButton }}
+      customButtons={{ showDayEvent: showDayEvent, refreshEvent: refreshEvent }}
       eventClick={eventClick}
       eventSources={eventSources(searchText)}
     />

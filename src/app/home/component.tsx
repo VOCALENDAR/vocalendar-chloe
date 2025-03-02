@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import integrationPlugIn from '@fullcalendar/interaction'
 import './fullcalendar.css'
+import { Box } from '@mui/material'
 
 type Props = object &
   Required<Pick<CalendarOptions, 'customButtons' | 'eventSourceSuccess' | 'eventClick' | 'eventSources'>>
@@ -17,15 +18,15 @@ const Home: React.FC<Props> = props => {
   // TODO FullcalendarがAPIを2回発行するのでなんとかしたい
   return (
     <>
-      <div className="vocalendar-main">
+      <Box className="vocalendar-main">
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, integrationPlugIn]}
           initialView="dayGridMonth"
           customButtons={props.customButtons}
           headerToolbar={{
-            left: 'prev,next today',
+            left: 'today prev,next',
             center: 'title',
-            right: 'customButton dayGridMonth,timeGridWeek,timeGridDay',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay showDayEvent refreshEvent',
           }}
           navLinks={true}
           businessHours={true}
@@ -34,7 +35,6 @@ const Home: React.FC<Props> = props => {
           editable={false}
           //events = {(info, succesCallback, failureCallback)=>{}}
           eventSources={props.eventSources}
-          height={640}
           eventSourceSuccess={props.eventSourceSuccess}
           eventSourceFailure={error => {
             console.log(error)
@@ -50,8 +50,10 @@ const Home: React.FC<Props> = props => {
             alert(info)
           }}
           eventClick={props.eventClick}
+          eventBorderColor="#33aa99"
+          eventBackgroundColor="#33aa99"
         />
-      </div>
+      </Box>
     </>
   )
 }
