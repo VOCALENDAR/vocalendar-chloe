@@ -31,7 +31,7 @@ const Home: React.FC<Props> = props => {
           navLinks={true}
           businessHours={true}
           displayEventTime={true}
-          dayMaxEventRows={5}
+          dayMaxEventRows={5} // contentHeight と一緒に計算する必要あり
           editable={false}
           //events = {(info, succesCallback, failureCallback)=>{}}
           eventSources={props.eventSources}
@@ -52,6 +52,8 @@ const Home: React.FC<Props> = props => {
           eventClick={props.eventClick}
           eventBorderColor="#33aa99"
           eventBackgroundColor="#33aa99"
+          contentHeight={'calc(100vh - 200px)'}
+          // aspectRatio={1.5} // 変化がない・・・
         />
       </Box>
     </>
