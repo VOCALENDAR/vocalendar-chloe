@@ -1,8 +1,9 @@
 import { CustomButtonInput, EventClickArg, EventInput, EventSourceInput } from '@fullcalendar/core'
-import React, { useState } from 'react'
+import React, { MouseEventHandler, useCallback, useRef, useState } from 'react'
 import { Event } from '../../_layout/component'
 import Home from './component'
 import { useSearchTextContext } from '../../_provider/searchTextContext'
+import FullCalendar from '@fullcalendar/react'
 
 type Props = {
   setShowEvent: (isShow: boolean) => void
@@ -86,6 +87,24 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(pr
     })
   }
 
+  /** FullCalendarを外部から操作するため */
+  const calendarRef = useRef<FullCalendar>(null)
+  /**
+   * 次へ(View依存？例えば月表示の場合には次月が表示される)
+   */
+  const goNext = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
+    const api = calendarRef.current?.getApi()
+    api?.next()
+  }, [calendarRef.current])
+
+  /**
+   * 前へ(View依存？例えば月表示の場合には次月が表示される)
+   */
+  const goPrev = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
+    const api = calendarRef.current?.getApi()
+    api?.prev()
+  }, [calendarRef.current])
+
   const { searchText } = useSearchTextContext()
 
   return (
@@ -94,6 +113,9 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(pr
       customButtons={{ showDayEvent: showDayEvent, refreshEvent: refreshEvent }}
       eventClick={eventClick}
       eventSources={eventSources(searchText)}
+      calendarRef={calendarRef}
+      goNext={goNext}
+      goPrev={goPrev}
     />
   )
 })

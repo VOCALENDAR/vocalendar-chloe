@@ -4,10 +4,14 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import integrationPlugIn from '@fullcalendar/interaction'
 import './fullcalendar.css'
-import { Box } from '@mui/material'
+import { Box, Button } from '@mui/material'
+import { MouseEventHandler } from 'react'
 
-type Props = object &
-  Required<Pick<CalendarOptions, 'customButtons' | 'eventSourceSuccess' | 'eventClick' | 'eventSources'>>
+type Props = {
+  calendarRef: React.RefObject<FullCalendar>
+  goNext: MouseEventHandler<HTMLButtonElement>
+  goPrev: MouseEventHandler<HTMLButtonElement>
+} & Required<Pick<CalendarOptions, 'customButtons' | 'eventSourceSuccess' | 'eventClick' | 'eventSources'>>
 
 /**
  * VOCALENDAR HOMEのView Component
@@ -19,7 +23,14 @@ const Home: React.FC<Props> = props => {
   return (
     <>
       <Box className="vocalendar-main">
+        <Button variant="contained" onClick={props.goPrev}>
+          Prev
+        </Button>
+        <Button variant="contained" onClick={props.goNext}>
+          Next
+        </Button>
         <FullCalendar
+          ref={props.calendarRef}
           plugins={[dayGridPlugin, timeGridPlugin, integrationPlugIn]}
           initialView="dayGridMonth"
           customButtons={props.customButtons}
