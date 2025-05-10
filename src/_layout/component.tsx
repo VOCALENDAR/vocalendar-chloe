@@ -78,7 +78,7 @@ const LayoutMain: React.FC<Props> = React.memo(function LayoutMainInner(props) {
           }}
         >
           <Grid container>
-            <Grid item xs={2}>
+            <Grid size={{ xs: 2 }}>
               <List>
                 <NavLink to="/">
                   <ListItem>
@@ -154,7 +154,7 @@ const LayoutMain: React.FC<Props> = React.memo(function LayoutMainInner(props) {
         sx={{ width: `${drawerWidth}px` }}
       >
         <Grid container>
-          <Grid item xs={2}>
+          <Grid size={{ xs: 2 }}>
             <List>
               <NavLink to="/">
                 <ListItem>

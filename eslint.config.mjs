@@ -38,5 +38,5 @@ export default ts.config({
       },
     ],
   },
-  ignores: ['build/*', 'node_modules/*', 'vite.config.js'],
+  ignores: ['build/*', 'node_modules/*', 'vite.config.js', 'package.json', 'package-lock.json'],
 })
