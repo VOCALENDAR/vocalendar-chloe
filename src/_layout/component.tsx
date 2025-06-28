@@ -90,14 +90,14 @@ const LayoutMain: React.FC<Props> = React.memo(function LayoutMainInner(_props) 
           </Grid>
         </Paper>
         <Container
+          maxWidth={false}
           // component="div"
           className="main"
           sx={{
             m: 0,
             p: 0,
             pb: 2,
-            // width: { xs: '100%', lg: `calc(100% - ${drawerWidth}px)` },
-            flexGrow: 1,
+            // flexGrow: 1,
             // display: 'flex',
             // flexDirection: 'row',
           }}
@@ -116,18 +116,6 @@ const LayoutMain: React.FC<Props> = React.memo(function LayoutMainInner(_props) 
             </Routes>
           </Box>
         </Container>
-        <Box
-          component="div"
-          sx={{
-            display: { xs: 'none', lg: 'block' },
-            m: 0,
-            p: 0,
-            width: `600px`,
-            minHeight: '640px',
-            backgroundImage: 'url("image/vocalendar-elrowa-mikuoriginal.png")',
-            backgroundSize: 'cover',
-          }}
-        ></Box>
       </Stack>
       <Drawer
         anchor="left"
