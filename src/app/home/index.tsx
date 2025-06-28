@@ -1,4 +1,4 @@
-import { CustomButtonInput, EventClickArg, EventInput, EventSourceInput } from '@fullcalendar/core'
+import { EventClickArg, EventInput, EventSourceInput } from '@fullcalendar/core'
 import React, { MouseEventHandler, useCallback, useRef, useState } from 'react'
 import Home from './component'
 import { useSearchTextContext } from '../../_provider/searchTextContext'
@@ -20,6 +20,7 @@ type Props = object
 const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(_props) {
   const [isHideLongEvent, setHideLongEvent] = useState(false)
   const [eventData, setEventData] = useState<Event | undefined>(undefined)
+  const [calendarTitle, setCalendarTitle] = useState<string | undefined>(undefined)
 
   // API発行の設定
   const eventSources = (searchText?: string): EventSourceInput[] => {
@@ -58,29 +59,15 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(_p
           // })
         }
       })
+    const api = calendarRef.current?.getApi()
+    setCalendarTitle(api?.view.title)
     return events
   }
 
   /**
-   * 期間イベントを除外するUIの定義
+   *
+   * @param event
    */
-  const showDayEvent: CustomButtonInput = {
-    text: isHideLongEvent ? 'ShowDayEvent' : 'HideDayEvent',
-    click: _event => {
-      setHideLongEvent(!isHideLongEvent)
-    },
-  }
-
-  /**
-   * リフレッシュボタン
-   */
-  const refreshEvent: CustomButtonInput = {
-    text: 'reflesh',
-    click: _event => {
-      // setHideLongEvent(!isHideLongEvent)
-    },
-  }
-
   const eventClick = (event: EventClickArg) => {
     setEventData({
       title: event.event.title,
@@ -98,6 +85,7 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(_p
   const goNext = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
     const api = calendarRef.current?.getApi()
     api?.next()
+    setCalendarTitle(api?.view.title)
   }, [calendarRef.current])
 
   /**
@@ -106,22 +94,54 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(_p
   const goPrev = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
     const api = calendarRef.current?.getApi()
     api?.prev()
+    setCalendarTitle(api?.view.title)
   }, [calendarRef.current])
 
-  const { searchText } = useSearchTextContext()
+  /**
+   * 今日に移動するボタン処理
+   */
+  const goToday = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
+    const api = calendarRef.current?.getApi()
+    api?.today()
+    setCalendarTitle(api?.view.title)
+  }, [calendarRef.current])
 
-  console.log(eventData)
+  /**
+   * ビュー切り替えボタン処理
+   */
+  const changeView = useCallback<MouseEventHandler<HTMLButtonElement>>(
+    event => {
+      const api = calendarRef.current?.getApi()
+      api?.changeView(event.currentTarget.value)
+      setCalendarTitle(api?.view.title)
+    },
+    [calendarRef.current]
+  )
+
+  /**
+   * 期間イベントを除外するUIの定義
+   */
+  const toggleShowDayEvent = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
+    // text: isHideLongEvent ? 'ShowDayEvent' : 'HideDayEvent',
+    setHideLongEvent(prev => {
+      return !prev
+    })
+  }, [calendarRef.current])
+
   return (
     <Home
       eventSourceSuccess={eventSourceSuccess}
-      customButtons={{ showDayEvent: showDayEvent, refreshEvent: refreshEvent }}
       eventClick={eventClick}
-      eventSources={eventSources(searchText)}
+      eventSources={eventSources(useSearchTextContext().searchText)}
       calendarRef={calendarRef}
       goNext={goNext}
       goPrev={goPrev}
+      goToday={goToday}
+      calendarTitle={calendarTitle ?? ''}
       showEventData={eventData}
       setShowEventData={setEventData}
+      changeView={changeView}
+      toggleShowDayEvent={toggleShowDayEvent}
     />
   )
 })

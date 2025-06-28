@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import integrationPlugIn from '@fullcalendar/interaction'
 import './fullcalendar.css'
-import { Box, Button, Drawer, Paper, Typography } from '@mui/material'
+import { Avatar, Box, Button, Drawer, Paper, Typography } from '@mui/material'
 import { MouseEventHandler } from 'react'
 import OgImage from '../../_features/ogImage'
 import { Event } from '.'
@@ -13,9 +13,13 @@ type Props = {
   calendarRef: React.RefObject<FullCalendar>
   goNext: MouseEventHandler<HTMLButtonElement>
   goPrev: MouseEventHandler<HTMLButtonElement>
+  goToday: MouseEventHandler<HTMLButtonElement>
+  changeView: MouseEventHandler<HTMLButtonElement>
+  toggleShowDayEvent: MouseEventHandler<HTMLButtonElement>
+  calendarTitle: string
   showEventData?: Event
   setShowEventData: React.Dispatch<React.SetStateAction<Event | undefined>>
-} & Required<Pick<CalendarOptions, 'customButtons' | 'eventSourceSuccess' | 'eventClick' | 'eventSources'>>
+} & Required<Pick<CalendarOptions, 'eventSourceSuccess' | 'eventClick' | 'eventSources'>>
 
 /**
  * VOCALENDAR HOMEのView Component
@@ -29,21 +33,70 @@ const Home: React.FC<Props> = props => {
   return (
     <>
       <Box className="vocalendar-main">
-        <Button variant="contained" onClick={props.goPrev}>
-          Prev
+        <Button variant="text" startIcon={<Avatar src={'./logo.vocalendar.png'} />}></Button>
+        <Typography sx={{ fontWeight: 'bold', fontSize: '1.7em', display: 'inline' }}>{props.calendarTitle}</Typography>
+        <Button
+          variant="contained"
+          sx={{ borderRadius: '20%', ml: 2, backgroundColor: '#169D7D' }}
+          onClick={props.goToday}
+        >
+          今日
         </Button>
-        <Button variant="contained" onClick={props.goNext}>
-          Next
+        <Button
+          variant="contained"
+          sx={{ borderRadius: '20% 0 0 20%', ml: 2, backgroundColor: '#169D7D' }}
+          onClick={props.goPrev}
+        >
+          前の月
+        </Button>
+        <Button
+          variant="contained"
+          sx={{ borderRadius: '0 20% 20% 0', ml: 0.5, backgroundColor: '#169D7D' }}
+          onClick={props.goNext}
+        >
+          次の月
+        </Button>
+        <Button
+          variant="contained"
+          sx={{ borderRadius: '20% 0 0 20%', ml: 0.5, backgroundColor: '#79DA77' }}
+          onClick={props.changeView}
+          value={'dayGridMonth'}
+          disabled={true}
+        >
+          月表示
+        </Button>
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: '#79DA77' }}
+          onClick={props.changeView}
+          value={'timeGridWeek'}
+        >
+          週表示
+        </Button>
+        <Button
+          variant="contained"
+          sx={{ borderRadius: '0 20% 20% 0', backgroundColor: '#79DA77' }}
+          onClick={props.changeView}
+          value={'timeGridDay'}
+        >
+          日表示
+        </Button>
+        <Button
+          variant="contained"
+          sx={{ borderRadius: '10%', backgroundColor: '#79DA77' }}
+          onClick={props.toggleShowDayEvent}
+        >
+          終日イベントを隠す
         </Button>
         <FullCalendar
           ref={props.calendarRef}
           plugins={[dayGridPlugin, timeGridPlugin, integrationPlugIn]}
           initialView="dayGridMonth"
-          customButtons={props.customButtons}
+          // customButtons={props.customButtons}
           headerToolbar={{
-            left: 'today prev,next',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay showDayEvent refreshEvent',
+            left: '',
+            center: '',
+            right: '',
           }}
           navLinks={true}
           businessHours={true}
@@ -67,8 +120,8 @@ const Home: React.FC<Props> = props => {
             alert(info)
           }}
           eventClick={props.eventClick}
-          eventBorderColor="#33aa99"
-          eventBackgroundColor="#33aa99"
+          eventBorderColor="#169D7D"
+          eventBackgroundColor="#169D7D"
           contentHeight={'calc(100vh - 200px)'}
           // aspectRatio={1.5} // 変化がない・・・
         />
