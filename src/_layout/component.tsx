@@ -1,25 +1,8 @@
-import { AddTask, Home, Notifications } from '@mui/icons-material'
-import {
-  AppBar,
-  Badge,
-  Box,
-  Container,
-  Drawer,
-  Grid,
-  IconButton,
-  Link,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  Paper,
-  Stack,
-  Toolbar,
-} from '@mui/material'
-import { NavLink, Route, Routes } from 'react-router-dom'
+import { Notifications } from '@mui/icons-material'
+import { AppBar, Badge, Box, Container, IconButton, Link, Toolbar } from '@mui/material'
+import { Route, Routes } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu'
 import { useState } from 'react'
-import { grey } from '@mui/material/colors'
 import HomeContainer from '../app/home'
 import React from 'react'
 import SearchBox from '../_features/searchBox'
@@ -31,7 +14,6 @@ type Props = object
  * @returns
  */
 const LayoutMain: React.FC<Props> = React.memo(function LayoutMainInner(_props) {
-  const drawerWidth = 200
   const [isOpenDrawer, setDrawer] = useState(false)
 
   return (
@@ -57,99 +39,33 @@ const LayoutMain: React.FC<Props> = React.memo(function LayoutMainInner(_props) 
           </Badge>
         </Toolbar>
       </AppBar>
-      <Stack direction="row" sx={{ backgroundColor: grey[50], marginTop: '50px' }}>
-        <Paper
-          sx={{
-            display: { xs: 'none', lg: 'block' },
-            width: `${drawerWidth}px`,
-          }}
-        >
-          <Grid container>
-            <Grid size={{ xs: 2 }}>
-              <List>
-                <NavLink to="/">
-                  <ListItem>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <Home />
-                      </ListItemIcon>
-                    </ListItemButton>
-                  </ListItem>
-                </NavLink>
-                <NavLink to="/add">
-                  <ListItem>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <AddTask />
-                      </ListItemIcon>
-                    </ListItemButton>
-                  </ListItem>
-                </NavLink>
-              </List>
-            </Grid>
-          </Grid>
-        </Paper>
-        <Container
-          maxWidth={false}
-          // component="div"
-          className="main"
-          sx={{
-            m: 0,
-            p: 0,
-            pb: 2,
-            // flexGrow: 1,
-            // display: 'flex',
-            // flexDirection: 'row',
-          }}
-        >
-          <Box
-            sx={{
-              my: { xs: 1, md: 2 },
-              mx: { xs: 0, md: 0 },
-              px: { xs: 0, md: 0 },
-              // flexGrow:1
-            }}
-          >
-            {/* コンテンツ部分 */}
-            <Routes>
-              <Route path="/" element={<HomeContainer />} />
-            </Routes>
-          </Box>
-        </Container>
-      </Stack>
-      <Drawer
-        anchor="left"
-        open={isOpenDrawer}
-        onClose={(_event, _reason) => {
-          setDrawer(!isOpenDrawer)
+      <Container
+        maxWidth={false}
+        // component="div"
+        className="main"
+        sx={{
+          p: 0,
+          pb: 2,
+          marginTop: '60px',
+          // flexGrow: 1,
+          // display: 'flex',
+          // flexDirection: 'row',
         }}
-        sx={{ width: `${drawerWidth}px` }}
       >
-        <Grid container>
-          <Grid size={{ xs: 2 }}>
-            <List>
-              <NavLink to="/">
-                <ListItem>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <Home />
-                    </ListItemIcon>
-                  </ListItemButton>
-                </ListItem>
-              </NavLink>
-              <NavLink to="/add">
-                <ListItem>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <AddTask />
-                    </ListItemIcon>
-                  </ListItemButton>
-                </ListItem>
-              </NavLink>
-            </List>
-          </Grid>
-        </Grid>
-      </Drawer>
+        <Box
+          sx={{
+            my: { xs: 1, md: 2 },
+            mx: { xs: 0, md: 0 },
+            px: { xs: 0, md: 0 },
+            // flexGrow:1
+          }}
+        >
+          {/* コンテンツ部分 */}
+          <Routes>
+            <Route path="/" element={<HomeContainer />} />
+          </Routes>
+        </Box>
+      </Container>
     </>
   )
 })
