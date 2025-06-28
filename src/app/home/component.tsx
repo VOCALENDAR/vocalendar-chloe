@@ -76,7 +76,9 @@ const Home: React.FC<Props> = props => {
       <Drawer
         anchor="right"
         open={props.showEventData != undefined}
-        onClose={(_event, _reason) => {}}
+        onClose={(_event, _reason) => {
+          props.setShowEventData(undefined)
+        }}
         sx={{ width: `${drawerWidth}px` }}
       >
         {props.showEventData && (
