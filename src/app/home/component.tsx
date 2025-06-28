@@ -4,13 +4,17 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import integrationPlugIn from '@fullcalendar/interaction'
 import './fullcalendar.css'
-import { Box, Button } from '@mui/material'
+import { Box, Button, Drawer, Paper, Typography } from '@mui/material'
 import { MouseEventHandler } from 'react'
+import OgImage from '../../_features/ogImage'
+import { Event } from '.'
 
 type Props = {
   calendarRef: React.RefObject<FullCalendar>
   goNext: MouseEventHandler<HTMLButtonElement>
   goPrev: MouseEventHandler<HTMLButtonElement>
+  showEventData?: Event
+  setShowEventData: React.Dispatch<React.SetStateAction<Event | undefined>>
 } & Required<Pick<CalendarOptions, 'customButtons' | 'eventSourceSuccess' | 'eventClick' | 'eventSources'>>
 
 /**
@@ -20,6 +24,8 @@ type Props = {
  */
 const Home: React.FC<Props> = props => {
   // TODO FullcalendarがAPIを2回発行するのでなんとかしたい
+  const drawerWidth = 200
+
   return (
     <>
       <Box className="vocalendar-main">
@@ -67,6 +73,42 @@ const Home: React.FC<Props> = props => {
           // aspectRatio={1.5} // 変化がない・・・
         />
       </Box>
+      <Drawer
+        anchor="right"
+        open={props.showEventData != undefined}
+        onClose={(_event, _reason) => {}}
+        sx={{ width: `${drawerWidth}px` }}
+      >
+        {props.showEventData && (
+          <Paper sx={{ maxWidth: '600px' }}>
+            <OgImage siteURL={'https://piapro.net/miku16thbd/'}></OgImage>
+            <div>
+              <Typography sx={{ fontWeight: 'bold' }}>イベント</Typography>
+            </div>
+            <div>
+              <Typography>{props.showEventData.title}</Typography>
+            </div>
+            <div>
+              <Typography sx={{ fontWeight: 'bold' }}>場所</Typography>
+            </div>
+            <div>
+              <Typography>{props.showEventData.location}</Typography>
+            </div>
+            <div>
+              <Typography sx={{ fontWeight: 'bold' }}>日時</Typography>
+            </div>
+            <div>
+              <Typography>{props.showEventData.start}</Typography>
+            </div>
+            <div>
+              <Typography sx={{ fontWeight: 'bold' }}>詳細</Typography>
+            </div>
+            <div>
+              <Typography>{props.showEventData.description}</Typography>
+            </div>
+          </Paper>
+        )}
+      </Drawer>
     </>
   )
 }

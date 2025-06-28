@@ -1,21 +1,25 @@
 import { CustomButtonInput, EventClickArg, EventInput, EventSourceInput } from '@fullcalendar/core'
 import React, { MouseEventHandler, useCallback, useRef, useState } from 'react'
-import { Event } from '../../_layout/component'
 import Home from './component'
 import { useSearchTextContext } from '../../_provider/searchTextContext'
 import FullCalendar from '@fullcalendar/react'
 
-type Props = {
-  setShowEvent: (isShow: boolean) => void
-  setShowEventData: (data: Event) => void
+export type Event = {
+  title: string
+  description: string
+  location: string
+  start: string
 }
+
+type Props = object
 
 /**
  * VOCALENDAR HOMEのコンテナ
  * @returns
  */
-const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(props) {
+const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(_props) {
   const [isHideLongEvent, setHideLongEvent] = useState(false)
+  const [eventData, setEventData] = useState<Event | undefined>(undefined)
 
   // API発行の設定
   const eventSources = (searchText?: string): EventSourceInput[] => {
@@ -78,8 +82,7 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(pr
   }
 
   const eventClick = (event: EventClickArg) => {
-    props.setShowEvent(true)
-    props.setShowEventData({
+    setEventData({
       title: event.event.title,
       start: event.event.start?.toISOString() ?? '',
       location: event.event.extendedProps.location,
@@ -107,6 +110,7 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(pr
 
   const { searchText } = useSearchTextContext()
 
+  console.log(eventData)
   return (
     <Home
       eventSourceSuccess={eventSourceSuccess}
@@ -116,6 +120,8 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(pr
       calendarRef={calendarRef}
       goNext={goNext}
       goPrev={goPrev}
+      showEventData={eventData}
+      setShowEventData={setEventData}
     />
   )
 })

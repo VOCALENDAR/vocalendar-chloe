@@ -15,7 +15,6 @@ import {
   Paper,
   Stack,
   Toolbar,
-  Typography,
 } from '@mui/material'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -23,27 +22,15 @@ import { useState } from 'react'
 import { grey } from '@mui/material/colors'
 import HomeContainer from '../app/home'
 import React from 'react'
-import OgImage from '../_features/ogImage'
 import SearchBox from '../_features/searchBox'
 
-export type Event = {
-  title: string
-  description: string
-  location: string
-  start: string
-}
-type Props = {
-  isShowEvent: boolean
-  setShowEvent: (isShow: boolean) => void
-  showEventData: Event
-  setShowEventData: (data: Event) => void
-}
+type Props = object
 
 /**
  * VOCALENDAR Main Layout View
  * @returns
  */
-const LayoutMain: React.FC<Props> = React.memo(function LayoutMainInner(props) {
+const LayoutMain: React.FC<Props> = React.memo(function LayoutMainInner(_props) {
   const drawerWidth = 200
   const [isOpenDrawer, setDrawer] = useState(false)
 
@@ -125,10 +112,7 @@ const LayoutMain: React.FC<Props> = React.memo(function LayoutMainInner(props) {
           >
             {/* コンテンツ部分 */}
             <Routes>
-              <Route
-                path="/"
-                element={<HomeContainer setShowEvent={props.setShowEvent} setShowEventData={props.setShowEventData} />}
-              />
+              <Route path="/" element={<HomeContainer />} />
             </Routes>
           </Box>
         </Container>
@@ -177,42 +161,6 @@ const LayoutMain: React.FC<Props> = React.memo(function LayoutMainInner(props) {
             </List>
           </Grid>
         </Grid>
-      </Drawer>
-      <Drawer
-        anchor="right"
-        open={props.isShowEvent}
-        onClose={(_event, _reason) => {
-          props.setShowEvent(!props.isShowEvent)
-        }}
-        sx={{ width: `${drawerWidth}px` }}
-      >
-        <Paper sx={{ maxWidth: '600px' }}>
-          <OgImage siteURL={'https://piapro.net/miku16thbd/'}></OgImage>
-          <div>
-            <Typography sx={{ fontWeight: 'bold' }}>イベント</Typography>
-          </div>
-          <div>
-            <Typography>{props.showEventData.title}</Typography>
-          </div>
-          <div>
-            <Typography sx={{ fontWeight: 'bold' }}>場所</Typography>
-          </div>
-          <div>
-            <Typography>{props.showEventData.location}</Typography>
-          </div>
-          <div>
-            <Typography sx={{ fontWeight: 'bold' }}>日時</Typography>
-          </div>
-          <div>
-            <Typography>{props.showEventData.start}</Typography>
-          </div>
-          <div>
-            <Typography sx={{ fontWeight: 'bold' }}>詳細</Typography>
-          </div>
-          <div>
-            <Typography>{props.showEventData.description}</Typography>
-          </div>
-        </Paper>
       </Drawer>
     </>
   )
