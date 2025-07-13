@@ -4,10 +4,11 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import integrationPlugIn from '@fullcalendar/interaction'
 import './fullcalendar.css'
-import { Avatar, Box, Button, Drawer, Paper, Typography } from '@mui/material'
-import { MouseEventHandler } from 'react'
+import { Avatar, Box, Button, Drawer, Modal, Paper, Stack, Typography } from '@mui/material'
+import { MouseEventHandler, useState } from 'react'
 import OgImage from '../../_features/ogImage'
 import { Event } from '.'
+import SearchBox from '../../_features/searchBox'
 
 type Props = {
   calendarRef: React.RefObject<FullCalendar>
@@ -28,7 +29,10 @@ type Props = {
  */
 const Home: React.FC<Props> = props => {
   // TODO FullcalendarがAPIを2回発行するのでなんとかしたい
-  const drawerWidth = 200
+  const drawerWidth = '200px'
+  const [open, setOpen] = useState(false)
+  const [openSearchResult, setOpenSearchResult] = useState(false)
+  const [openSearchDetail, setOpenSearchDeteil] = useState(false)
 
   return (
     <>
@@ -88,6 +92,67 @@ const Home: React.FC<Props> = props => {
         >
           終日イベントを隠す
         </Button>
+        <Button
+          variant="text"
+          startIcon={<Avatar src={'./button.search.png'} />}
+          onClick={() => setOpen(true)}
+        ></Button>
+        <Modal open={open} onClose={() => setOpen(false)}>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              bgcolor: 'background.paper',
+              width: 400,
+              // m: 0,
+              // p: 3,
+              borderRadius: '40px',
+            }}
+          >
+            <SearchBox
+              onClickHandler={() => {
+                setOpen(false)
+                setOpenSearchResult(true)
+              }}
+              inputProps={{ sx: { fontSize: '1.5em', height: '2em', mr: -1, pl: '15px' } }}
+            />
+          </Box>
+        </Modal>
+        <Drawer
+          anchor="right"
+          open={openSearchResult}
+          onClose={() => {
+            setOpenSearchResult(false)
+          }}
+          sx={{ width: `${drawerWidth}px` }}
+        >
+          <Stack direction={'row'} spacing={2}>
+            <Paper sx={{ maxWidth: '600px' }}>
+              <div
+                onClick={() => {
+                  setOpenSearchDeteil(true)
+                }}
+              >
+                <Typography sx={{ fontWeight: 'bold' }}>イベント一覧</Typography>
+              </div>
+              <div>
+                <Typography sx={{ fontWeight: 'bold' }}>イベント一覧サンプル</Typography>
+              </div>
+            </Paper>
+            {openSearchDetail && (
+              <Paper sx={{ maxWidth: '600px' }}>
+                <div>
+                  <Typography sx={{ fontWeight: 'bold' }}>イベントタイトル</Typography>
+                </div>
+                <div>
+                  <Typography sx={{ fontWeight: 'bold' }}>イベント内容</Typography>
+                </div>
+              </Paper>
+            )}
+          </Stack>
+        </Drawer>
         <FullCalendar
           ref={props.calendarRef}
           plugins={[dayGridPlugin, timeGridPlugin, integrationPlugIn]}
@@ -123,7 +188,7 @@ const Home: React.FC<Props> = props => {
           eventClick={props.eventClick}
           eventBorderColor="#169D7D"
           eventBackgroundColor="#169D7D"
-          contentHeight={'calc(100vh - 170px)'}
+          contentHeight={'calc(100vh - 110px)'}
           // aspectRatio={1.5} // 変化がない・・・
         />
       </Box>

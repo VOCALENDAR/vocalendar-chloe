@@ -1,10 +1,9 @@
-import { SearchOutlined } from '@mui/icons-material'
-import { InputAdornment, TextField, TextFieldProps } from '@mui/material'
-import React, { ChangeEventHandler } from 'react'
+import { Avatar, Button, FormControl, Input, InputProps } from '@mui/material'
+import React, { MouseEventHandler } from 'react'
 
 type Props = {
-  onChangeHandler: ChangeEventHandler
-  textFieldProps?: TextFieldProps
+  onClickHandler: MouseEventHandler<HTMLButtonElement>
+  inputProps?: InputProps
 }
 
 /**
@@ -14,21 +13,21 @@ type Props = {
 const SearchBoxCompornent: React.FC<Props> = React.memo(function SearchBoxInner(props) {
   return (
     <>
-      <TextField
-        size="small"
-        fullWidth
-        variant="outlined"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchOutlined />
-            </InputAdornment>
-          ),
-        }}
-        placeholder="検索"
-        onChange={props.onChangeHandler}
-        {...props.textFieldProps}
-      />
+      <FormControl fullWidth>
+        <Input
+          id="SearchBoxCompornent"
+          endAdornment={
+            <Button
+              type="submit"
+              variant="text"
+              startIcon={<Avatar src={'./button.search.png'} />}
+              onSubmit={props.onClickHandler}
+              onClick={props.onClickHandler}
+            ></Button>
+          }
+          {...props.inputProps}
+        />
+      </FormControl>
     </>
   )
 })
