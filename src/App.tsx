@@ -5,7 +5,7 @@ import { SearchTextProvider } from './_provider/searchTextContext'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query' //import './App.css';
 
 // Create a client
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })
 
 const App: React.FC = () => {
   return (

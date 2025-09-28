@@ -9,6 +9,7 @@ import { MouseEventHandler, useState } from 'react'
 import OgImage from '../../_features/ogImage'
 import { Event } from '.'
 import SearchBox from '../../_features/searchBox'
+import SearchList from '../../_features/searchList'
 
 type Props = {
   calendarRef: React.RefObject<FullCalendar>
@@ -31,7 +32,6 @@ const Home: React.FC<Props> = props => {
   // TODO FullcalendarがAPIを2回発行するのでなんとかしたい
   const drawerWidth = '200px'
   const [isOpenSearchDialog, setOpenSearchDialog] = useState(false)
-  const [openSearchDetail, setOpenSearchDeteil] = useState(false)
 
   return (
     <>
@@ -107,28 +107,7 @@ const Home: React.FC<Props> = props => {
         >
           <SearchBox inputProps={{ sx: { fontSize: '1.5em', height: '2em', mr: -1, pl: '15px' } }} />
           <Stack direction={'row'} spacing={2}>
-            <Paper sx={{ maxWidth: '600px' }}>
-              <div
-                onClick={() => {
-                  setOpenSearchDeteil(true)
-                }}
-              >
-                <Typography sx={{ fontWeight: 'bold' }}>イベント一覧</Typography>
-              </div>
-              <div>
-                <Typography sx={{ fontWeight: 'bold' }}>イベント一覧サンプル</Typography>
-              </div>
-            </Paper>
-            {openSearchDetail && (
-              <Paper sx={{ maxWidth: '600px' }}>
-                <div>
-                  <Typography sx={{ fontWeight: 'bold' }}>イベントタイトル</Typography>
-                </div>
-                <div>
-                  <Typography sx={{ fontWeight: 'bold' }}>イベント内容</Typography>
-                </div>
-              </Paper>
-            )}
+            <SearchList></SearchList>
           </Stack>
         </Drawer>
         <FullCalendar
