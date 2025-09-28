@@ -4,7 +4,9 @@ import { useSearchTextContext } from '../../_provider/searchTextContext'
 import { InputProps } from '@mui/material'
 
 type Props = {
-  onClickHandler?: () => void
+  /* 検索ボタンを押した時の追加処理 */
+  onClickAdditionalProcess?: () => void
+  /* 入力コンポーネントへのパラメータ */
   inputProps?: InputProps
 }
 
@@ -13,15 +15,15 @@ type Props = {
  * @returns
  */
 const SearchBox: React.FC<Props> = props => {
-  const [text, setText] = useState('')
+  const [inputText, setInputText] = useState('')
   const onClickHandler = useCallback<MouseEventHandler<HTMLButtonElement>>(
     _event => {
       // 暫定
       console.log((document.getElementById('SearchBoxCompornent') as HTMLInputElement).value)
-      setText((document.getElementById('SearchBoxCompornent') as HTMLInputElement).value ?? '')
-      props.onClickHandler?.()
+      setInputText((document.getElementById('SearchBoxCompornent') as HTMLInputElement).value ?? '')
+      props.onClickAdditionalProcess?.()
     },
-    [setText]
+    [setInputText]
   )
   // イベントの遅延発火
   // TODO 遅延発火は上手くいっているけど、ReactがFullcalendarをイベントで書き換えるので意味がないｗ
@@ -38,8 +40,8 @@ const SearchBox: React.FC<Props> = props => {
   // // 参考：https://ja.stackoverflow.com/questions/83569
   const { setSearchText } = useSearchTextContext()
   useEffect(() => {
-    console.log('useEffect = ', text)
-    setSearchText(text)
+    console.log('useEffect = ', inputText)
+    setSearchText(inputText)
   }, [useSearchTextContext])
 
   return <SearchBoxCompornent onClickHandler={onClickHandler} inputProps={{ ...props.inputProps }} />

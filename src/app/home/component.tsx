@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import integrationPlugIn from '@fullcalendar/interaction'
 import './fullcalendar.css'
-import { Avatar, Box, Button, Drawer, Modal, Paper, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Button, Drawer, Paper, Stack, Typography } from '@mui/material'
 import { MouseEventHandler, useState } from 'react'
 import OgImage from '../../_features/ogImage'
 import { Event } from '.'
@@ -30,8 +30,7 @@ type Props = {
 const Home: React.FC<Props> = props => {
   // TODO FullcalendarがAPIを2回発行するのでなんとかしたい
   const drawerWidth = '200px'
-  const [open, setOpen] = useState(false)
-  const [openSearchResult, setOpenSearchResult] = useState(false)
+  const [isOpenSearchDialog, setOpenSearchDialog] = useState(false)
   const [openSearchDetail, setOpenSearchDeteil] = useState(false)
 
   return (
@@ -95,39 +94,18 @@ const Home: React.FC<Props> = props => {
         <Button
           variant="text"
           startIcon={<Avatar src={'./button.search.png'} />}
-          onClick={() => setOpen(true)}
+          onClick={() => setOpenSearchDialog(true)}
         ></Button>
-        <Modal open={open} onClose={() => setOpen(false)}>
-          <Box
-            sx={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              bgcolor: 'background.paper',
-              width: 400,
-              // m: 0,
-              // p: 3,
-              borderRadius: '40px',
-            }}
-          >
-            <SearchBox
-              onClickHandler={() => {
-                setOpen(false)
-                setOpenSearchResult(true)
-              }}
-              inputProps={{ sx: { fontSize: '1.5em', height: '2em', mr: -1, pl: '15px' } }}
-            />
-          </Box>
-        </Modal>
+        {/* 検索結果一覧 */}
         <Drawer
           anchor="right"
-          open={openSearchResult}
+          open={isOpenSearchDialog}
           onClose={() => {
-            setOpenSearchResult(false)
+            setOpenSearchDialog(false)
           }}
           sx={{ width: `${drawerWidth}px` }}
         >
+          <SearchBox inputProps={{ sx: { fontSize: '1.5em', height: '2em', mr: -1, pl: '15px' } }} />
           <Stack direction={'row'} spacing={2}>
             <Paper sx={{ maxWidth: '600px' }}>
               <div

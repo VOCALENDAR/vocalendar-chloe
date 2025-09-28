@@ -2,7 +2,9 @@ import { Avatar, Button, FormControl, Input, InputProps } from '@mui/material'
 import React, { MouseEventHandler } from 'react'
 
 type Props = {
+  /* 検索ボタン押した時のハンドラ */
   onClickHandler: MouseEventHandler<HTMLButtonElement>
+  /* Inputコンポーネントへのパラメータ */
   inputProps?: InputProps
 }
 
