@@ -4,6 +4,7 @@ import ts from 'typescript-eslint'
 import pluginReactConfig from 'eslint-plugin-react/configs/recommended.js'
 import pluginReactJSXRuntime from 'eslint-plugin-react/configs/jsx-runtime.js'
 import { fixupConfigRules } from '@eslint/compat'
+import pluginQuery from '@tanstack/eslint-plugin-query'
 
 export default ts.config({
   files: ['src/**/*.{ts,tsx}'],
@@ -12,6 +13,7 @@ export default ts.config({
     ...ts.configs.recommended,
     ...fixupConfigRules(pluginReactConfig),
     ...fixupConfigRules(pluginReactJSXRuntime),
+    ...pluginQuery.configs['flat/recommended'],
   ],
   languageOptions: {
     parserOptions: { ecmaFeatures: { jsx: true } },
