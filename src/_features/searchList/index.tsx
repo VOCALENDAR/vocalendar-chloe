@@ -18,14 +18,10 @@ type Props = {
 const SearchList: React.FC<Props> = _props => {
   const { searchText } = useSearchTextContext()
 
-  // TODO 検索条件入力による検索を実施
-
-  // Access the client
-  // const queryClient = useQueryClient()
-  const { isPending, /**error,*/ data } = useQuery({
+  const { isPending, error, data } = useQuery({
     queryKey: [searchText],
     queryFn: () => {
-      return fetch(`/core/events.json?q=${searchText}`, {
+      const result = fetch(`/core/events.json?q=${searchText}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -37,6 +33,8 @@ const SearchList: React.FC<Props> = _props => {
         const data = await res.json()
         return data
       })
+      console.log(result)
+      return result
     },
     enabled: !!searchText,
   })
@@ -44,13 +42,16 @@ const SearchList: React.FC<Props> = _props => {
   if (isPending) {
     return 'loading...'
   }
+  if (error) {
+    return 'error...'
+  }
   console.log(data)
 
   // const onClickHandler = useCallback<MouseEventHandler<HTMLButtonElement>>(_event => {
   //   props.onClickAdditionalProcess?.()
   // }, [])
 
-  return <SearchListCompornent />
+  return <SearchListCompornent events={data} />
 }
 
 export default SearchList

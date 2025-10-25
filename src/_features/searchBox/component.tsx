@@ -1,11 +1,13 @@
 import { Avatar, Button, FormControl, Input, InputProps } from '@mui/material'
-import React, { MouseEventHandler } from 'react'
+import React, { ChangeEventHandler, MouseEventHandler } from 'react'
 
 type Props = {
   /* 検索ボタン押した時のハンドラ */
   onClickHandler: MouseEventHandler<HTMLButtonElement>
   /* Inputコンポーネントへのパラメータ */
   inputProps?: InputProps
+  inputOnchangeHandler: ChangeEventHandler
+  inputValue: string
 }
 
 /**
@@ -18,6 +20,7 @@ const SearchBoxCompornent: React.FC<Props> = React.memo(function SearchBoxInner(
       <FormControl fullWidth>
         <Input
           id="SearchBoxCompornent"
+          type="text"
           endAdornment={
             <Button
               type="submit"
@@ -27,7 +30,9 @@ const SearchBoxCompornent: React.FC<Props> = React.memo(function SearchBoxInner(
               onClick={props.onClickHandler}
             ></Button>
           }
-          {...props.inputProps}
+          // {...props.inputProps}
+          value={props.inputValue}
+          onChange={props.inputOnchangeHandler}
         />
       </FormControl>
     </>

@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 
 type Props = {
   zantei?: string
+  events: {
+    summary: string
+  }[]
 }
 
 /**
@@ -15,15 +18,27 @@ const SearchListCompornent: React.FC<Props> = React.memo(function SearchBoxInner
     <>
       <Stack direction={'row'} spacing={2}>
         <Paper sx={{ maxWidth: '600px' }}>
+          <div>
+            <Typography sx={{ fontWeight: 'bold' }}>イベント一覧</Typography>
+          </div>
           <div
             onClick={() => {
               setOpenSearchDeteil(true)
             }}
           >
-            <Typography sx={{ fontWeight: 'bold' }}>イベント一覧</Typography>
-          </div>
-          <div>
-            <Typography sx={{ fontWeight: 'bold' }}>イベント一覧サンプル</Typography>
+            <div>
+              <Typography sx={{ fontWeight: 'bold' }}>イベント内容</Typography>
+            </div>
+            {_props.events?.map((event, index) => (
+              <Paper key={index} sx={{ maxWidth: '600px' }}>
+                <div>
+                  <Typography sx={{ fontWeight: 'bold' }}>{event.summary}</Typography>
+                </div>
+                <div>
+                  <Typography>{event.summary}</Typography>
+                </div>
+              </Paper>
+            ))}
           </div>
         </Paper>
         {openSearchDetail && (
