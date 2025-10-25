@@ -1,7 +1,6 @@
 import { EventClickArg, EventInput, EventSourceInput } from '@fullcalendar/core'
 import React, { MouseEventHandler, useCallback, useRef, useState } from 'react'
 import Home from './component'
-import { useSearchTextContext } from '../../_provider/searchTextContext'
 import FullCalendar from '@fullcalendar/react'
 
 export type Event = {
@@ -132,7 +131,7 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(_p
     <Home
       eventSourceSuccess={eventSourceSuccess}
       eventClick={eventClick}
-      eventSources={eventSources(useSearchTextContext().searchText)}
+      eventSources={eventSources(/*useSearchTextContext().searchText*/)}
       calendarRef={calendarRef}
       goNext={goNext}
       goPrev={goPrev}
