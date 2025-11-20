@@ -2,13 +2,7 @@ import { EventClickArg, EventInput, EventSourceInput } from '@fullcalendar/core'
 import React, { MouseEventHandler, useCallback, useRef, useState } from 'react'
 import Home from './component'
 import FullCalendar from '@fullcalendar/react'
-
-export type Event = {
-  title: string
-  description: string
-  location: string
-  start: string
-}
+import { Event } from '../types/event'
 
 type Props = object
 
@@ -70,6 +64,7 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(_p
   const eventClick = (event: EventClickArg) => {
     setEventData({
       title: event.event.title,
+      summary: '', // こっちでは不要
       start: event.event.start?.toISOString() ?? '',
       location: event.event.extendedProps.location,
       description: event.event.extendedProps.description,

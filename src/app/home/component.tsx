@@ -7,9 +7,9 @@ import './fullcalendar.css'
 import { Avatar, Box, Button, Drawer, Paper, Stack, Typography } from '@mui/material'
 import { MouseEventHandler, useState } from 'react'
 import OgImage from '../../_features/ogImage'
-import { Event } from '.'
 import SearchBox from '../../_features/searchBox'
 import SearchList from '../../_features/searchList'
+import { Event } from '../types/event'
 
 type Props = {
   calendarRef: React.RefObject<FullCalendar>
@@ -107,7 +107,7 @@ const Home: React.FC<Props> = props => {
         >
           <SearchBox inputProps={{ sx: { fontSize: '1.5em', height: '2em', mr: -1, pl: '15px' } }} />
           <Stack direction={'row'} spacing={2}>
-            <SearchList></SearchList>
+            <SearchList setShowEventData={props.setShowEventData}></SearchList>
           </Stack>
         </Drawer>
         <FullCalendar
