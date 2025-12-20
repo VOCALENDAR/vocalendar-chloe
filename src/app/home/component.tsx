@@ -10,6 +10,8 @@ import OgImage from '../../_features/ogImage'
 import SearchBox from '../../_features/searchBox'
 import SearchList from '../../_features/searchList'
 import { Event } from '../types/event'
+import { SearchTextProvider } from '../../_provider/searchTextContext'
+import { useSearchListSelectedContext } from '../../_provider/searchListSelectedContext'
 
 type Props = {
   calendarRef: React.RefObject<FullCalendar>
@@ -32,7 +34,6 @@ const Home: React.FC<Props> = props => {
   // TODO FullcalendarがAPIを2回発行するのでなんとかしたい
   const drawerWidth = '200px'
   const [isOpenSearchDialog, setOpenSearchDialog] = useState(false)
-
   return (
     <>
       <Box className="vocalendar-main">
@@ -103,12 +104,51 @@ const Home: React.FC<Props> = props => {
           onClose={() => {
             setOpenSearchDialog(false)
           }}
-          sx={{ width: `${drawerWidth}px` }}
+          sx={{
+            width: `${drawerWidth}px`,
+          }}
         >
-          <SearchBox inputProps={{ sx: { fontSize: '1.5em', height: '2em', mr: -1, pl: '15px' } }} />
-          <Stack direction={'row'} spacing={2}>
-            <SearchList setShowEventData={props.setShowEventData}></SearchList>
-          </Stack>
+          <SearchTextProvider>
+            <Stack direction={'row'}>
+              <Stack direction={'column'} spacing={2}>
+                <SearchBox inputProps={{ sx: { fontSize: '1.5em', height: '2em', mr: -1, pl: '15px' } }} />
+                <SearchList />
+              </Stack>
+              {useSearchListSelectedContext().selectedEvnet && (
+                <Paper
+                  sx={{
+                    maxWidth: '600px',
+                  }}
+                >
+                  <OgImage siteURL={'https://piapro.net/miku16thbd/'}></OgImage>
+                  <div>
+                    <Typography sx={{ fontWeight: 'bold' }}>イベント</Typography>
+                  </div>
+                  <div>
+                    <Typography>{useSearchListSelectedContext().selectedEvnet?.summary}</Typography>
+                  </div>
+                  <div>
+                    <Typography sx={{ fontWeight: 'bold' }}>場所</Typography>
+                  </div>
+                  <div>
+                    <Typography>{useSearchListSelectedContext().selectedEvnet?.location}</Typography>
+                  </div>
+                  <div>
+                    <Typography sx={{ fontWeight: 'bold' }}>日時</Typography>
+                  </div>
+                  <div>
+                    <Typography>{useSearchListSelectedContext().selectedEvnet?.start}</Typography>
+                  </div>
+                  <div>
+                    <Typography sx={{ fontWeight: 'bold' }}>詳細</Typography>
+                  </div>
+                  <div>
+                    <Typography>{useSearchListSelectedContext().selectedEvnet?.description}</Typography>
+                  </div>
+                </Paper>
+              )}
+            </Stack>
+          </SearchTextProvider>
         </Drawer>
         <FullCalendar
           ref={props.calendarRef}

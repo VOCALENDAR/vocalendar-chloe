@@ -1,29 +1,19 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import SearchListCompornent from './component'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchTextContext } from '../../_provider/searchTextContext'
-import { Event } from '../../app/types/event'
 
 type Props = {
-  /* 検索ボタンを押した時の追加処理 */
+  /* 現状なにもしてない */
   onClickAdditionalProcess?: () => void
-  setShowEventData: React.Dispatch<React.SetStateAction<Event | undefined>>
 }
 
 /**
  * 検索一覧のコンテナ
  * @returns
  */
-const SearchList: React.FC<Props> = props => {
+const SearchList: React.FC<Props> = _props => {
   const { searchText } = useSearchTextContext()
-
-  //  const onClickHandler = useCallback<MouseEventHandler<HTMLButtonElement>>(
-  const onClickHandler = useCallback(
-    (event: Event) => {
-      props.setShowEventData(event)
-    },
-    [props.setShowEventData]
-  )
 
   const { isPending, error, data } = useQuery({
     queryKey: [searchText],
@@ -63,7 +53,7 @@ const SearchList: React.FC<Props> = props => {
   //   props.onClickAdditionalProcess?.()
   // }, [])
 
-  return <SearchListCompornent events={data} onClickEventHandler={onClickHandler} />
+  return <SearchListCompornent events={data} />
 }
 
 export default SearchList

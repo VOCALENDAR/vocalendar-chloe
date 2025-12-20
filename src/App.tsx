@@ -1,8 +1,8 @@
 import { CssBaseline } from '@mui/material'
 import { BrowserRouter } from 'react-router-dom'
 import LayoutMainConteiner from './_layout'
-import { SearchTextProvider } from './_provider/searchTextContext'
 import { AppQueryProvider } from './_provider/appQuery'
+import { SearchListSelectedProvider } from './_provider/searchListSelectedContext'
 
 const App: React.FC = () => {
   return (
@@ -10,9 +10,9 @@ const App: React.FC = () => {
       <BrowserRouter>
         <CssBaseline />
         <AppQueryProvider>
-          <SearchTextProvider>
+          <SearchListSelectedProvider>
             <LayoutMainConteiner />
-          </SearchTextProvider>
+          </SearchListSelectedProvider>
         </AppQueryProvider>
       </BrowserRouter>
     </>
