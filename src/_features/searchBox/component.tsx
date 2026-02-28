@@ -1,6 +1,10 @@
 import { Avatar, Button, FormControl, Input, InputProps } from '@mui/material'
 import React, { ChangeEventHandler, MouseEventHandler } from 'react'
 
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+
 type Props = {
   /* 検索ボタン押した時のハンドラ */
   onClickHandler: MouseEventHandler<HTMLButtonElement>
@@ -34,6 +38,9 @@ const SearchBoxCompornent: React.FC<Props> = React.memo(function SearchBoxInner(
           value={props.inputValue}
           onChange={props.inputOnchangeHandler}
         />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker />
+        </LocalizationProvider>
       </FormControl>
     </>
   )
