@@ -3,6 +3,10 @@
   "eslint.useFlatConfig": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "prettier.requireConfig": true
+  "prettier.requireConfig": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit"
+  }
   //  "editor.rulers": [120, 160, 200]
 }

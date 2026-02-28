@@ -5,6 +5,7 @@ import pluginReactConfig from 'eslint-plugin-react/configs/recommended.js'
 import pluginReactJSXRuntime from 'eslint-plugin-react/configs/jsx-runtime.js'
 import { fixupConfigRules } from '@eslint/compat'
 import pluginQuery from '@tanstack/eslint-plugin-query'
+import unuserdPlugin from 'eslint-plugin-unused-imports'
 
 export default ts.config({
   files: ['src/**/*.{ts,tsx}'],
@@ -15,6 +16,7 @@ export default ts.config({
     ...fixupConfigRules(pluginReactJSXRuntime),
     ...pluginQuery.configs['flat/recommended'],
   ],
+  plugins: { 'unused-imports': unuserdPlugin },
   languageOptions: {
     parserOptions: { ecmaFeatures: { jsx: true } },
     globals: {
