@@ -21,6 +21,8 @@ const SearchListCompornent: React.FC<Props> = React.memo(function SearchBoxInner
         sx={{
           maxWidth: '600px',
           marginRight: `${openSearchDetail ? '600px' : '0'}`,
+          height: '100vh',
+          overflowY: 'auto',
         }}
       >
         <Stack direction={'column'} spacing={2}>
