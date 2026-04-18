@@ -23,6 +23,15 @@ const ShowEventData: React.FC<Props> = ({ event, sx }) => (
     <div>
       <Typography>{event.location}</Typography>
     </div>
+    {event.location && (
+      <iframe
+        src={`https://maps.google.com/maps?q=${encodeURIComponent(event.location)}&output=embed`}
+        width="100%"
+        height="300"
+        style={{ border: 0 }}
+        loading="lazy"
+      />
+    )}
     <div>
       <Typography sx={{ fontWeight: 'bold' }}>日時</Typography>
     </div>
