@@ -1,17 +1,17 @@
-import FullCalendar from '@fullcalendar/react'
 import { CalendarOptions } from '@fullcalendar/core'
 import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
 import integrationPlugIn from '@fullcalendar/interaction'
-import './fullcalendar.css'
+import FullCalendar from '@fullcalendar/react'
+import timeGridPlugin from '@fullcalendar/timegrid'
 import { Avatar, Box, Button, Drawer, Paper, Stack, Typography } from '@mui/material'
 import { MouseEventHandler, useState } from 'react'
 import OgImage from '../../_features/ogImage'
 import SearchBox from '../../_features/searchBox'
 import SearchList from '../../_features/searchList'
-import { Event } from '../types/event'
-import { SearchTextProvider } from '../../_provider/searchTextContext'
 import { useSearchListSelectedContext } from '../../_provider/searchListSelectedContext'
+import { SearchTextProvider } from '../../_provider/searchTextContext'
+import { Event } from '../types/event'
+import './fullcalendar.css'
 
 type Props = {
   calendarRef: React.RefObject<FullCalendar>
@@ -109,7 +109,7 @@ const Home: React.FC<Props> = props => {
           }}
         >
           <SearchTextProvider>
-            <Stack direction={'row'}>
+            <Stack direction={'row'} sx={{ overflow: 'hidden' }}>
               <Stack direction={'column'} spacing={2}>
                 <SearchBox inputProps={{ sx: { fontSize: '1.5em', height: '2em', mr: -1, pl: '15px' } }} />
                 <SearchList />
@@ -118,6 +118,8 @@ const Home: React.FC<Props> = props => {
                 <Paper
                   sx={{
                     maxWidth: '600px',
+                    overflow: 'auto',
+                    maxHeight: '100vh',
                   }}
                 >
                   <OgImage siteURL={'https://piapro.net/miku16thbd/'}></OgImage>
