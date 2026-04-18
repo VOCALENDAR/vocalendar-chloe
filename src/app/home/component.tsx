@@ -114,9 +114,9 @@ const Home: React.FC<Props> = props => {
                 <SearchBox inputProps={{ sx: { fontSize: '1.5em', height: '2em', mr: -1, pl: '15px' } }} />
                 <SearchList />
               </Stack>
-              {useSearchListSelectedContext().selectedEvnet && (
+              {useSearchListSelectedContext().selectedEvent && (
                 <ShowEventData
-                  event={useSearchListSelectedContext().selectedEvnet!}
+                  event={useSearchListSelectedContext().selectedEvent!}
                   sx={{ overflow: 'auto', maxHeight: '100vh' }}
                 />
               )}

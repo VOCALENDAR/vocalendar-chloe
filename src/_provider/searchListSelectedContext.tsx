@@ -2,8 +2,8 @@ import { createContext, useContext, useState } from 'react'
 import { Event } from '../app/types/event'
 
 interface searchListSelectedContextValue {
-  selectedEvnet: Event | undefined
-  setSelectedEvnet: (event: Event) => void
+  selectedEvent: Event | undefined
+  setSelectedEvent: (event: Event) => void
 }
 
 const searchListSelectedContext = createContext<searchListSelectedContextValue | null>(null)
@@ -14,9 +14,9 @@ const searchListSelectedContext = createContext<searchListSelectedContextValue |
  * @returns
  */
 export function SearchListSelectedProvider({ children }: { children: React.ReactNode }) {
-  const [selectedEvnet, setSelectedEvnet] = useState<Event | undefined>()
+  const [selectedEvent, setSelectedEvent] = useState<Event | undefined>()
   return (
-    <searchListSelectedContext.Provider value={{ selectedEvnet, setSelectedEvnet }}>
+    <searchListSelectedContext.Provider value={{ selectedEvent, setSelectedEvent }}>
       {children}
     </searchListSelectedContext.Provider>
   )

@@ -1,7 +1,7 @@
 import { Box, Divider, Paper, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import { Event } from '../../app/types/event'
 import { useSearchListSelectedContext } from '../../_provider/searchListSelectedContext'
+import { Event } from '../../app/types/event'
 
 type Props = {
   events: Event[]
@@ -13,7 +13,7 @@ type Props = {
  */
 const SearchListCompornent: React.FC<Props> = React.memo(function SearchBoxInner(_props) {
   const [openSearchDetail, setOpenSearchDeteil] = useState(false)
-  const { setSelectedEvnet } = useSearchListSelectedContext()
+  const { setSelectedEvent } = useSearchListSelectedContext()
 
   return (
     <>
@@ -31,7 +31,7 @@ const SearchListCompornent: React.FC<Props> = React.memo(function SearchBoxInner
               <div
                 onClick={() => {
                   setOpenSearchDeteil(true)
-                  setSelectedEvnet(event)
+                  setSelectedEvent(event)
                 }}
               >
                 <div>
