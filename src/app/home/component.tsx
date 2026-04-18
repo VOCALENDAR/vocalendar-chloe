@@ -34,6 +34,7 @@ const Home: React.FC<Props> = props => {
   // TODO FullcalendarがAPIを2回発行するのでなんとかしたい
   const drawerWidth = '200px'
   const [isOpenSearchDialog, setOpenSearchDialog] = useState(false)
+  const [isHideAllDays, setHideAllDays] = useState(false)
   return (
     <>
       <Box className="vocalendar-main">
@@ -43,7 +44,15 @@ const Home: React.FC<Props> = props => {
         </Typography>
         <Button
           variant="contained"
-          sx={{ borderRadius: '20%', ml: 2, backgroundColor: '#169D7D' }}
+          sx={{
+            borderRadius: '20%',
+            ml: 2,
+            backgroundColor: '#169D7D',
+            '&:active': {
+              boxShadow: 0, // 影を消す
+              transform: 'translateY(2px)', // 2px下にずらす
+            },
+          }}
           onClick={props.goToday}
         >
           今日
@@ -61,7 +70,11 @@ const Home: React.FC<Props> = props => {
           }}
           onClick={props.goPrev}
         >
-          前の月
+          前の
+          {(() => {
+            const type = props.calendarRef.current?.getApi()?.view.type
+            return type == 'dayGridMonth' ? '月' : type == 'timeGridWeek' ? '週' : '日'
+          })()}
         </Button>
         <Button
           variant="contained"
@@ -76,7 +89,11 @@ const Home: React.FC<Props> = props => {
           }}
           onClick={props.goNext}
         >
-          次の月
+          次の
+          {(() => {
+            const type = props.calendarRef.current?.getApi()?.view.type
+            return type == 'dayGridMonth' ? '月' : type == 'timeGridWeek' ? '週' : '日'
+          })()}
         </Button>
         <Button
           variant="contained"
@@ -91,7 +108,7 @@ const Home: React.FC<Props> = props => {
           }}
           onClick={props.changeView}
           value={'dayGridMonth'}
-          disabled={true}
+          disabled={props.calendarRef.current?.getApi()?.view.type === 'dayGridMonth'}
         >
           月表示
         </Button>
@@ -106,6 +123,7 @@ const Home: React.FC<Props> = props => {
           }}
           onClick={props.changeView}
           value={'timeGridWeek'}
+          disabled={props.calendarRef.current?.getApi()?.view.type === 'timeGridWeek'}
         >
           週表示
         </Button>
@@ -121,6 +139,7 @@ const Home: React.FC<Props> = props => {
           }}
           onClick={props.changeView}
           value={'timeGridDay'}
+          disabled={props.calendarRef.current?.getApi()?.view.type === 'timeGridDay'}
         >
           日表示
         </Button>
@@ -134,9 +153,12 @@ const Home: React.FC<Props> = props => {
               transform: 'translateY(2px)', // 2px下にずらす
             },
           }}
-          onClick={props.toggleShowDayEvent}
+          onClick={event => {
+            props.toggleShowDayEvent(event)
+            setHideAllDays(!isHideAllDays)
+          }}
         >
-          終日イベントを隠す
+          {isHideAllDays ? '終日イベントを表示' : '終日イベントを隠す'}
         </Button>
         <Button
           variant="text"
