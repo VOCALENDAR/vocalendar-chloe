@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import OgImageComp from './component'
 
 type Props = {
-  siteURL: string
+  siteURL?: string
 }
 
 /**
@@ -10,10 +10,13 @@ type Props = {
  * @returns
  */
 const OgImage: React.FC<Props> = props => {
+  if (!props.siteURL) {
+    return <></>
+  }
   const [imageUrl, setImageUrl] = useState<string>()
   useEffect(() => {
     ;(async () => {
-      setImageUrl(await getImageURL(props.siteURL))
+      setImageUrl(await getImageURL(props.siteURL!))
     })()
   }, [props.siteURL])
 
