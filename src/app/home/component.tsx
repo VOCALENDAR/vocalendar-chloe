@@ -3,11 +3,11 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import integrationPlugIn from '@fullcalendar/interaction'
 import FullCalendar from '@fullcalendar/react'
 import timeGridPlugin from '@fullcalendar/timegrid'
-import { Avatar, Box, Button, Drawer, Paper, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Button, Drawer, Stack, Typography } from '@mui/material'
 import { MouseEventHandler, useState } from 'react'
-import OgImage from '../../_features/ogImage'
 import SearchBox from '../../_features/searchBox'
 import SearchList from '../../_features/searchList'
+import ShowEventData from '../../_features/showEventData'
 import { useSearchListSelectedContext } from '../../_provider/searchListSelectedContext'
 import { SearchTextProvider } from '../../_provider/searchTextContext'
 import { Event } from '../types/event'
@@ -115,39 +115,10 @@ const Home: React.FC<Props> = props => {
                 <SearchList />
               </Stack>
               {useSearchListSelectedContext().selectedEvnet && (
-                <Paper
-                  sx={{
-                    maxWidth: '600px',
-                    overflow: 'auto',
-                    maxHeight: '100vh',
-                  }}
-                >
-                  <OgImage siteURL={'https://piapro.net/miku16thbd/'}></OgImage>
-                  <div>
-                    <Typography sx={{ fontWeight: 'bold' }}>イベント</Typography>
-                  </div>
-                  <div>
-                    <Typography>{useSearchListSelectedContext().selectedEvnet?.summary}</Typography>
-                  </div>
-                  <div>
-                    <Typography sx={{ fontWeight: 'bold' }}>場所</Typography>
-                  </div>
-                  <div>
-                    <Typography>{useSearchListSelectedContext().selectedEvnet?.location}</Typography>
-                  </div>
-                  <div>
-                    <Typography sx={{ fontWeight: 'bold' }}>日時</Typography>
-                  </div>
-                  <div>
-                    <Typography>{useSearchListSelectedContext().selectedEvnet?.start}</Typography>
-                  </div>
-                  <div>
-                    <Typography sx={{ fontWeight: 'bold' }}>詳細</Typography>
-                  </div>
-                  <div>
-                    <Typography>{useSearchListSelectedContext().selectedEvnet?.description}</Typography>
-                  </div>
-                </Paper>
+                <ShowEventData
+                  event={useSearchListSelectedContext().selectedEvnet!}
+                  sx={{ overflow: 'auto', maxHeight: '100vh' }}
+                />
               )}
             </Stack>
           </SearchTextProvider>
@@ -199,35 +170,7 @@ const Home: React.FC<Props> = props => {
         }}
         sx={{ width: `${drawerWidth}px` }}
       >
-        {props.showEventData && (
-          <Paper sx={{ maxWidth: '600px' }}>
-            <OgImage siteURL={'https://piapro.net/miku16thbd/'}></OgImage>
-            <div>
-              <Typography sx={{ fontWeight: 'bold' }}>イベント</Typography>
-            </div>
-            <div>
-              <Typography>{props.showEventData.title}</Typography>
-            </div>
-            <div>
-              <Typography sx={{ fontWeight: 'bold' }}>場所</Typography>
-            </div>
-            <div>
-              <Typography>{props.showEventData.location}</Typography>
-            </div>
-            <div>
-              <Typography sx={{ fontWeight: 'bold' }}>日時</Typography>
-            </div>
-            <div>
-              <Typography>{props.showEventData.start}</Typography>
-            </div>
-            <div>
-              <Typography sx={{ fontWeight: 'bold' }}>詳細</Typography>
-            </div>
-            <div>
-              <Typography>{props.showEventData.description}</Typography>
-            </div>
-          </Paper>
-        )}
+        {props.showEventData && <ShowEventData event={props.showEventData} />}
       </Drawer>
     </>
   )
