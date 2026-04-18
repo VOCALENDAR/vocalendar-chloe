@@ -38,7 +38,9 @@ const Home: React.FC<Props> = props => {
     <>
       <Box className="vocalendar-main">
         <Button variant="text" startIcon={<Avatar src={'./logo.vocalendar.png'} />}></Button>
-        <Typography sx={{ fontWeight: 'bold', fontSize: '1.7em', display: 'inline' }}>{props.calendarTitle}</Typography>
+        <Typography sx={{ fontWeight: 'bold', fontSize: '1.7em', display: 'inline', verticalAlign: '-6px' }}>
+          {props.calendarTitle}
+        </Typography>
         <Button
           variant="contained"
           sx={{ borderRadius: '20%', ml: 2, backgroundColor: '#169D7D' }}
@@ -48,21 +50,45 @@ const Home: React.FC<Props> = props => {
         </Button>
         <Button
           variant="contained"
-          sx={{ borderRadius: '20% 0 0 20%', ml: 2, backgroundColor: '#169D7D' }}
+          sx={{
+            borderRadius: '20% 0 0 20%',
+            ml: 2,
+            backgroundColor: '#169D7D',
+            '&:active': {
+              boxShadow: 0, // 影を消す
+              transform: 'translateY(2px)', // 2px下にずらす
+            },
+          }}
           onClick={props.goPrev}
         >
           前の月
         </Button>
         <Button
           variant="contained"
-          sx={{ borderRadius: '0 20% 20% 0', ml: 0.5, backgroundColor: '#169D7D' }}
+          sx={{
+            borderRadius: '0 20% 20% 0',
+            ml: 0.5,
+            backgroundColor: '#169D7D',
+            '&:active': {
+              boxShadow: 0, // 影を消す
+              transform: 'translateY(2px)', // 2px下にずらす
+            },
+          }}
           onClick={props.goNext}
         >
           次の月
         </Button>
         <Button
           variant="contained"
-          sx={{ borderRadius: '20% 0 0 20%', ml: 0.5, backgroundColor: '#79DA77' }}
+          sx={{
+            borderRadius: '20% 0 0 20%',
+            ml: 0.5,
+            backgroundColor: '#79DA77',
+            '&:active': {
+              boxShadow: 0, // 影を消す
+              transform: 'translateY(2px)', // 2px下にずらす
+            },
+          }}
           onClick={props.changeView}
           value={'dayGridMonth'}
           disabled={true}
@@ -71,7 +97,13 @@ const Home: React.FC<Props> = props => {
         </Button>
         <Button
           variant="contained"
-          sx={{ backgroundColor: '#79DA77' }}
+          sx={{
+            backgroundColor: '#79DA77',
+            '&:active': {
+              boxShadow: 0, // 影を消す
+              transform: 'translateY(2px)', // 2px下にずらす
+            },
+          }}
           onClick={props.changeView}
           value={'timeGridWeek'}
         >
@@ -79,7 +111,14 @@ const Home: React.FC<Props> = props => {
         </Button>
         <Button
           variant="contained"
-          sx={{ borderRadius: '0 20% 20% 0', backgroundColor: '#79DA77' }}
+          sx={{
+            borderRadius: '0 20% 20% 0',
+            backgroundColor: '#79DA77',
+            '&:active': {
+              boxShadow: 0, // 影を消す
+              transform: 'translateY(2px)', // 2px下にずらす
+            },
+          }}
           onClick={props.changeView}
           value={'timeGridDay'}
         >
@@ -87,7 +126,14 @@ const Home: React.FC<Props> = props => {
         </Button>
         <Button
           variant="contained"
-          sx={{ borderRadius: '10%', backgroundColor: '#79DA77' }}
+          sx={{
+            borderRadius: '10%',
+            backgroundColor: '#79DA77',
+            '&:active': {
+              boxShadow: 0, // 影を消す
+              transform: 'translateY(2px)', // 2px下にずらす
+            },
+          }}
           onClick={props.toggleShowDayEvent}
         >
           終日イベントを隠す
