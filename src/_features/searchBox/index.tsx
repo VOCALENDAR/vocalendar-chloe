@@ -1,7 +1,8 @@
-import React, { ChangeEventHandler, MouseEventHandler, useCallback, useEffect, useState } from 'react'
-import SearchBoxCompornent from './component'
-import { useSearchTextContext } from '../../_provider/searchTextContext'
 import { InputProps } from '@mui/material'
+import { PickerValue } from '@mui/x-date-pickers/internals'
+import React, { ChangeEventHandler, MouseEventHandler, useCallback, useEffect, useState } from 'react'
+import { useSearchTextContext } from '../../_provider/searchTextContext'
+import SearchBoxCompornent from './component'
 
 type Props = {
   /* 検索ボタンを押した時の追加処理 */
@@ -16,7 +17,8 @@ type Props = {
  */
 const SearchBox: React.FC<Props> = props => {
   const [inputText, setInputText] = useState('')
-  const { setSearchText } = useSearchTextContext()
+  const [dateValue, setDateValue] = useState<PickerValue>(null)
+  const { setSearchText, setSearchDay } = useSearchTextContext()
   const onChangehandler = useCallback<ChangeEventHandler<HTMLInputElement>>(
     event => {
       setInputText(event.target.value)
@@ -27,9 +29,10 @@ const SearchBox: React.FC<Props> = props => {
   const onClickHandler = useCallback<MouseEventHandler<HTMLButtonElement>>(
     _event => {
       setSearchText(inputText)
+      setSearchDay(dateValue ? dateValue.format('YYYY/MM/DD') : undefined)
       props.onClickAdditionalProcess?.()
     },
-    [inputText, setSearchText]
+    [inputText, dateValue, setSearchText, setSearchDay]
   )
 
   // イベントの遅延発火
@@ -56,6 +59,7 @@ const SearchBox: React.FC<Props> = props => {
       inputProps={{ ...props.inputProps }}
       inputOnchangeHandler={onChangehandler}
       inputValue={inputText}
+      dateOnChangeHandler={setDateValue}
     />
   )
 }

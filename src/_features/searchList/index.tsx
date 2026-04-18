@@ -1,7 +1,7 @@
-import React from 'react'
-import SearchListCompornent from './component'
 import { useQuery } from '@tanstack/react-query'
+import React from 'react'
 import { useSearchTextContext } from '../../_provider/searchTextContext'
+import SearchListCompornent from './component'
 
 type Props = {
   /* 現状なにもしてない */
@@ -13,12 +13,12 @@ type Props = {
  * @returns
  */
 const SearchList: React.FC<Props> = _props => {
-  const { searchText } = useSearchTextContext()
+  const { searchText, searchDay } = useSearchTextContext()
 
   const { isPending, error, data } = useQuery({
-    queryKey: [searchText],
+    queryKey: [searchText, searchDay],
     queryFn: () => {
-      const result = fetch(`/core/events.json?q=${searchText}`, {
+      const result = fetch(`/core/events.json?q=${searchText}${searchDay ? `&startTime=${searchDay}` : ''}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

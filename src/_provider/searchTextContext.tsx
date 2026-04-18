@@ -3,6 +3,8 @@ import { createContext, useContext, useState } from 'react'
 interface SearchTextContextValue {
   searchText: string
   setSearchText: (text: string) => void
+  searchDay?: string
+  setSearchDay: (day?: string) => void
 }
 
 const SearchTextContext = createContext<SearchTextContextValue | null>(null)
@@ -14,7 +16,13 @@ const SearchTextContext = createContext<SearchTextContextValue | null>(null)
  */
 export function SearchTextProvider({ children }: { children: React.ReactNode }) {
   const [searchText, setSearchText] = useState<string>('')
-  return <SearchTextContext.Provider value={{ searchText, setSearchText }}>{children}</SearchTextContext.Provider>
+  const [searchDay, setSearchDay] = useState<string | undefined>(undefined)
+
+  return (
+    <SearchTextContext.Provider value={{ searchText, setSearchText, searchDay, setSearchDay }}>
+      {children}
+    </SearchTextContext.Provider>
+  )
 }
 
 /**

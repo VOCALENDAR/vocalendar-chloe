@@ -1,11 +1,13 @@
-import { Avatar, Button, Collapse, FormControl, IconButton, Input, InputProps, Stack } from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { Avatar, Button, Collapse, FormControl, IconButton, Input, InputProps, Stack } from '@mui/material'
 import React, { ChangeEventHandler, MouseEventHandler, useState } from 'react'
 
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import { PickerValue } from '@mui/x-date-pickers/internals'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { DateValidationError, PickerChangeHandlerContext } from '@mui/x-date-pickers/models'
 
 type Props = {
   /* 検索ボタン押した時のハンドラ */
@@ -14,6 +16,7 @@ type Props = {
   inputProps?: InputProps
   inputOnchangeHandler: ChangeEventHandler
   inputValue: string
+  dateOnChangeHandler: (value: PickerValue, context: PickerChangeHandlerContext<DateValidationError>) => void
 }
 
 /**
@@ -50,7 +53,7 @@ const SearchBoxCompornent: React.FC<Props> = React.memo(function SearchBoxInner(
         </Stack>
         <Collapse in={openDatePicker}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker />
+            <DatePicker format="YYYY/MM/DD" onChange={props.dateOnChangeHandler} />
           </LocalizationProvider>
         </Collapse>
       </FormControl>
