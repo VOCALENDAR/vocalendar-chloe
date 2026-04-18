@@ -16,7 +16,7 @@ const OgImageComp: React.FC<Props> = React.memo(function OgImageCompInner(props)
         textAlign: 'center',
       }}
     >
-      <img src={props.imageURL} />
+      <img src={props.imageURL} style={{ maxWidth: '100%', height: 'auto' }} />
     </Box>
   ) : (
     <></>
