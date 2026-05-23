@@ -1,8 +1,8 @@
 import { EventClickArg, EventInput, EventSourceInput } from '@fullcalendar/core'
-import React, { MouseEventHandler, useCallback, useRef, useState } from 'react'
-import Home from './component'
 import FullCalendar from '@fullcalendar/react'
+import React, { MouseEventHandler, useCallback, useMemo, useRef, useState } from 'react'
 import { Event } from '../types/event'
+import Home from './component'
 
 type Props = object
 
@@ -11,35 +11,32 @@ type Props = object
  * @returns
  */
 const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(_props) {
-  const [isHideLongEvent, setHideLongEvent] = useState(false)
+  const [_isHideLongEvent, setHideLongEvent] = useState(false)
+  const isHideLongEventRef = useRef(false)
   const [eventData, setEventData] = useState<Event | undefined>(undefined)
   const [calendarTitle, setCalendarTitle] = useState<string | undefined>(undefined)
 
   // API発行の設定
-  const eventSources = (searchText?: string): EventSourceInput[] => {
-    const serchConditon = searchText ? { q: searchText } : {}
-    return [
+  const eventSources = useMemo<EventSourceInput[]>(
+    () => [
       {
         url: '/core/events.json',
         method: 'GET',
         format: 'json',
         startParam: 'startTime', // URLパラメータに入れる取得開始時間
         endParam: 'endTime',
-        extraParams: {
-          ...serchConditon,
-          order: '1',
-        },
+        extraParams: { order: '1' },
       },
-    ]
-  }
+    ],
+    []
+  )
 
   // Vocalendar Coreからイベントを取得してきた時にCoreとFullcalendarのミスマッチ等を吸収する
-  const eventSourceSuccess = (events: EventInput[]) => {
+  const eventSourceSuccess = useCallback((events: EventInput[]) => {
     // TODO 1日より長い期間のあるイベントを除外したい
     events
       .filter(event => {
-        // const nextDay = event.setDate(event.getDate() + 1)
-        return !isHideLongEvent || !event.allday
+        return !isHideLongEventRef.current || !event.allday
       })
       // EventDataの書き換えはeventDataTransformでもできる
       .forEach(event => {
@@ -55,7 +52,7 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(_p
     const api = calendarRef.current?.getApi()
     setCalendarTitle(api?.view.title)
     return events
-  }
+  }, [])
 
   /**
    *
@@ -116,17 +113,18 @@ const HomeContainer: React.FC<Props> = React.memo(function HomeContainerInner(_p
    * 期間イベントを除外するUIの定義
    */
   const toggleShowDayEvent = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
-    // text: isHideLongEvent ? 'ShowDayEvent' : 'HideDayEvent',
     setHideLongEvent(prev => {
+      isHideLongEventRef.current = !prev
       return !prev
     })
-  }, [calendarRef.current])
+    calendarRef.current?.getApi().refetchEvents()
+  }, [])
 
   return (
     <Home
       eventSourceSuccess={eventSourceSuccess}
       eventClick={eventClick}
-      eventSources={eventSources(/*useSearchTextContext().searchText*/)}
+      eventSources={eventSources}
       calendarRef={calendarRef}
       goNext={goNext}
       goPrev={goPrev}
