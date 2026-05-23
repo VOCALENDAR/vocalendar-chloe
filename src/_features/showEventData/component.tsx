@@ -42,7 +42,9 @@ const ShowEventData: React.FC<Props> = ({ event, sx }) => (
       <Typography sx={{ fontWeight: 'bold' }}>詳細</Typography>
     </div>
     <div>
-      <Typography>{event.description}</Typography>
+      <Typography sx={{ whiteSpace: 'pre-line' }}>
+        {event.description?.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]*>/g, '')}
+      </Typography>
     </div>
   </Paper>
 )

@@ -38,7 +38,9 @@ const SearchListCompornent: React.FC<Props> = React.memo(function SearchBoxInner
                   <Typography sx={{ fontWeight: 'bold' }}>{event.summary}</Typography>
                 </div>
                 <div>
-                  <Typography>{event.description}</Typography>
+                  <Typography sx={{ whiteSpace: 'pre-line' }}>
+                    {event.description?.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]*>/g, '')}
+                  </Typography>
                 </div>
               </div>
               <Divider />
