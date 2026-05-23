@@ -229,9 +229,9 @@ const Home: React.FC<Props> = props => {
           }}
           // うごかない？
           selectable={true}
-          select={info => {
-            alert(info)
-          }}
+          // select={info => {
+          //   alert(info)
+          // }}
           eventClick={props.eventClick}
           eventBorderColor="#169D7D"
           eventBackgroundColor="#169D7D"
