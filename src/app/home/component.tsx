@@ -48,6 +48,7 @@ const Home: React.FC<Props> = props => {
             borderRadius: '20%',
             ml: 2,
             backgroundColor: '#169D7D',
+            boxShadow: 0, // 影を消す
             '&:active': {
               boxShadow: 0, // 影を消す
               transform: 'translateY(2px)', // 2px下にずらす
@@ -63,6 +64,7 @@ const Home: React.FC<Props> = props => {
             borderRadius: '20% 0 0 20%',
             ml: 2,
             backgroundColor: '#169D7D',
+            boxShadow: 0, // 影を消す
             '&:active': {
               boxShadow: 0, // 影を消す
               transform: 'translateY(2px)', // 2px下にずらす
@@ -82,6 +84,7 @@ const Home: React.FC<Props> = props => {
             borderRadius: '0 20% 20% 0',
             ml: 0.5,
             backgroundColor: '#169D7D',
+            boxShadow: 0, // 影を消す
             '&:active': {
               boxShadow: 0, // 影を消す
               transform: 'translateY(2px)', // 2px下にずらす
@@ -101,6 +104,7 @@ const Home: React.FC<Props> = props => {
             borderRadius: '20% 0 0 20%',
             ml: 0.5,
             backgroundColor: '#79DA77',
+            boxShadow: 0, // 影を消す
             '&:active': {
               boxShadow: 0, // 影を消す
               transform: 'translateY(2px)', // 2px下にずらす
@@ -116,6 +120,7 @@ const Home: React.FC<Props> = props => {
           variant="contained"
           sx={{
             backgroundColor: '#79DA77',
+            boxShadow: 0, // 影を消す
             '&:active': {
               boxShadow: 0, // 影を消す
               transform: 'translateY(2px)', // 2px下にずらす
@@ -132,6 +137,7 @@ const Home: React.FC<Props> = props => {
           sx={{
             borderRadius: '0 20% 20% 0',
             backgroundColor: '#79DA77',
+            boxShadow: 0, // 影を消す
             '&:active': {
               boxShadow: 0, // 影を消す
               transform: 'translateY(2px)', // 2px下にずらす
@@ -148,6 +154,7 @@ const Home: React.FC<Props> = props => {
           sx={{
             borderRadius: '10%',
             backgroundColor: '#79DA77',
+            boxShadow: 0, // 影を消す
             '&:active': {
               boxShadow: 0, // 影を消す
               transform: 'translateY(2px)', // 2px下にずらす
