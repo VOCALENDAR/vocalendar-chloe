@@ -12,16 +12,10 @@ const ShowEventData: React.FC<Props> = ({ event, sx }) => (
   <Paper sx={{ maxWidth: '600px', ...sx }}>
     <OgImage siteURL={extractURL(event.description)}></OgImage>
     <div>
-      <Typography sx={{ fontWeight: 'bold' }}>イベント</Typography>
+      <Typography sx={{ fontWeight: 'bold' }}>{event.title || event.summary}</Typography>
     </div>
     <div>
-      <Typography>{event.title || event.summary}</Typography>
-    </div>
-    <div>
-      <Typography sx={{ fontWeight: 'bold' }}>場所</Typography>
-    </div>
-    <div>
-      <Typography>{event.location}</Typography>
+      <Typography sx={{ fontWeight: 'bold' }}>🏢{event.location}</Typography>
     </div>
     {event.location && (
       <iframe
@@ -33,16 +27,10 @@ const ShowEventData: React.FC<Props> = ({ event, sx }) => (
       />
     )}
     <div>
-      <Typography sx={{ fontWeight: 'bold' }}>日時</Typography>
+      <Typography sx={{ fontWeight: 'bold' }}>📅{event.start}</Typography>
     </div>
     <div>
-      <Typography>{event.start}</Typography>
-    </div>
-    <div>
-      <Typography sx={{ fontWeight: 'bold' }}>詳細</Typography>
-    </div>
-    <div>
-      <Typography sx={{ whiteSpace: 'pre-line' }}>
+      <Typography sx={{ whiteSpace: 'pre-line', marginTop: '10px' }}>
         {event.description?.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]*>/g, '')}
       </Typography>
     </div>
