@@ -1,5 +1,6 @@
 import { InputProps } from '@mui/material'
 import { PickerValue } from '@mui/x-date-pickers/internals'
+import dayjs from 'dayjs'
 import React, { ChangeEventHandler, MouseEventHandler, useCallback, useEffect, useState } from 'react'
 import { useSearchTextContext } from '../../_provider/searchTextContext'
 import SearchBoxCompornent from './component'
@@ -17,7 +18,7 @@ type Props = {
  */
 const SearchBox: React.FC<Props> = props => {
   const [inputText, setInputText] = useState('')
-  const [dateValue, setDateValue] = useState<PickerValue>(null)
+  const [dateValue, setDateValue] = useState<PickerValue>(dayjs())
   const { setSearchText, setSearchDay } = useSearchTextContext()
   const onChangehandler = useCallback<ChangeEventHandler<HTMLInputElement>>(
     event => {

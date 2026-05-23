@@ -8,6 +8,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { PickerValue } from '@mui/x-date-pickers/internals'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DateValidationError, PickerChangeHandlerContext } from '@mui/x-date-pickers/models'
+import dayjs from 'dayjs'
 
 type Props = {
   /* 検索ボタン押した時のハンドラ */
@@ -53,7 +54,7 @@ const SearchBoxCompornent: React.FC<Props> = React.memo(function SearchBoxInner(
         </Stack>
         <Collapse in={openDatePicker}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker format="YYYY/MM/DD" onChange={props.dateOnChangeHandler} />
+            <DatePicker format="YYYY/MM/DD" onChange={props.dateOnChangeHandler} defaultValue={dayjs()} />
           </LocalizationProvider>
         </Collapse>
       </FormControl>
