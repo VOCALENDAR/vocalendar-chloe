@@ -39,7 +39,9 @@ const Home: React.FC<Props> = props => {
     <>
       <Box className="vocalendar-main">
         <Button variant="text" startIcon={<Avatar src={'./logo.vocalendar.png'} />}></Button>
-        <Typography sx={{ fontWeight: 'bold', fontSize: '1.7em', display: 'inline', verticalAlign: '-6px' }}>
+        <Typography
+          sx={{ fontWeight: 'bold', fontSize: '1.7em', display: 'inline-block', verticalAlign: '-6px', width: '280px' }}
+        >
           {props.calendarTitle}
         </Typography>
         <Button
