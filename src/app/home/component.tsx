@@ -104,7 +104,7 @@ const Home: React.FC<Props> = props => {
           variant="contained"
           sx={{
             borderRadius: '10px 0 0 10px',
-            ml: 0.5,
+            ml: 2,
             backgroundColor: '#79DA77',
             boxShadow: 0, // 影を消す
             '&:active': {
@@ -123,6 +123,7 @@ const Home: React.FC<Props> = props => {
           sx={{
             backgroundColor: '#79DA77',
             boxShadow: 0, // 影を消す
+            ml: 0.5,
             '&:active': {
               boxShadow: 0, // 影を消す
               transform: 'translateY(2px)', // 2px下にずらす
@@ -139,6 +140,7 @@ const Home: React.FC<Props> = props => {
           sx={{
             borderRadius: '0 10px 10px 0',
             backgroundColor: '#79DA77',
+            ml: 0.5,
             boxShadow: 0, // 影を消す
             '&:active': {
               boxShadow: 0, // 影を消す
@@ -157,6 +159,7 @@ const Home: React.FC<Props> = props => {
             borderRadius: '10px',
             backgroundColor: '#79DA77',
             boxShadow: 0, // 影を消す
+            ml: 2,
             '&:active': {
               boxShadow: 0, // 影を消す
               transform: 'translateY(2px)', // 2px下にずらす
@@ -172,6 +175,7 @@ const Home: React.FC<Props> = props => {
         <Button
           variant="text"
           startIcon={<Avatar src={'./button.search.png'} />}
+          sx={{ ml: 1 }}
           onClick={() => setOpenSearchDialog(true)}
         ></Button>
         {/* 検索結果一覧 */}
