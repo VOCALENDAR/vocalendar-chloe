@@ -1,6 +1,7 @@
 import { Paper, SxProps, Typography } from '@mui/material'
 import { Event } from '../../app/types/event'
 import extractURL from '../../util/extractURL'
+import linkifyText from '../../util/linkifyText'
 import OgImage from '../ogImage'
 
 type Props = {
@@ -31,7 +32,8 @@ const ShowEventData: React.FC<Props> = ({ event, sx }) => (
     </div>
     <div>
       <Typography sx={{ whiteSpace: 'pre-line', marginTop: '10px' }}>
-        {event.description?.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]*>/g, '')}
+        {/* 改行を反映 */}
+        {linkifyText(event.description?.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]*>/g, '') ?? '')}
       </Typography>
     </div>
   </Paper>
