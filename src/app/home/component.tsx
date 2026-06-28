@@ -47,7 +47,7 @@ const Home: React.FC<Props> = props => {
         <Button
           variant="contained"
           sx={{
-            borderRadius: '20%',
+            borderRadius: '10px',
             ml: 2,
             backgroundColor: '#169D7D',
             boxShadow: 0, // 影を消す
@@ -63,7 +63,7 @@ const Home: React.FC<Props> = props => {
         <Button
           variant="contained"
           sx={{
-            borderRadius: '20% 0 0 20%',
+            borderRadius: '10px 0 0 10px',
             ml: 2,
             backgroundColor: '#169D7D',
             boxShadow: 0, // 影を消す
@@ -83,7 +83,7 @@ const Home: React.FC<Props> = props => {
         <Button
           variant="contained"
           sx={{
-            borderRadius: '0 20% 20% 0',
+            borderRadius: '0 10px 10px 0',
             ml: 0.5,
             backgroundColor: '#169D7D',
             boxShadow: 0, // 影を消す
@@ -103,7 +103,7 @@ const Home: React.FC<Props> = props => {
         <Button
           variant="contained"
           sx={{
-            borderRadius: '20% 0 0 20%',
+            borderRadius: '10px 0 0 10px',
             ml: 0.5,
             backgroundColor: '#79DA77',
             boxShadow: 0, // 影を消す
@@ -137,7 +137,7 @@ const Home: React.FC<Props> = props => {
         <Button
           variant="contained"
           sx={{
-            borderRadius: '0 20% 20% 0',
+            borderRadius: '0 10px 10px 0',
             backgroundColor: '#79DA77',
             boxShadow: 0, // 影を消す
             '&:active': {
@@ -154,7 +154,7 @@ const Home: React.FC<Props> = props => {
         <Button
           variant="contained"
           sx={{
-            borderRadius: '10%',
+            borderRadius: '10px',
             backgroundColor: '#79DA77',
             boxShadow: 0, // 影を消す
             '&:active': {
