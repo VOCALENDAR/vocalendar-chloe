@@ -123,6 +123,7 @@ const Home: React.FC<Props> = props => {
           sx={{
             backgroundColor: '#79DA77',
             boxShadow: 0, // 影を消す
+            borderRadius: '0',
             ml: 0.5,
             '&:active': {
               boxShadow: 0, // 影を消す
