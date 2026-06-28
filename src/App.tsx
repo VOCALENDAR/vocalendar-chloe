@@ -7,7 +7,7 @@ import { SearchListSelectedProvider } from './_provider/searchListSelectedContex
 const App: React.FC = () => {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename="/beta">
         <CssBaseline />
         <AppQueryProvider>
           <SearchListSelectedProvider>
