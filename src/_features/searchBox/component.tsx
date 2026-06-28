@@ -12,7 +12,7 @@ import dayjs from 'dayjs'
 
 type Props = {
   /* 検索ボタン押した時のハンドラ */
-  onClickHandler: MouseEventHandler<HTMLButtonElement>
+  onClickHandler: (e: React.SyntheticEvent) => void
   /* Inputコンポーネントへのパラメータ */
   inputProps?: InputProps
   inputOnchangeHandler: ChangeEventHandler
@@ -39,13 +39,14 @@ const SearchBoxCompornent: React.FC<Props> = React.memo(function SearchBoxInner(
                 type="submit"
                 variant="text"
                 startIcon={<Avatar src={'./button.search.png'} />}
-                onSubmit={props.onClickHandler}
-                onClick={props.onClickHandler}
+                onSubmit={props.onClickHandler as MouseEventHandler<HTMLButtonElement>}
+                onClick={props.onClickHandler as MouseEventHandler<HTMLButtonElement>}
               ></Button>
             }
             // {...props.inputProps}
             value={props.inputValue}
             onChange={props.inputOnchangeHandler}
+            onKeyDown={e => e.key === 'Enter' && props.onClickHandler(e)}
             fullWidth
           />
           <IconButton onClick={() => setOpenDatePicker(!openDatePicker)}>
