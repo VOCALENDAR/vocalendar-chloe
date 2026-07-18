@@ -11,7 +11,9 @@ type Props = {
 
 const ShowEventData: React.FC<Props> = ({ event, sx }) => (
   <Paper sx={{ maxWidth: '600px', ...sx }}>
-    <OgImage siteURL={extractURL(event.description)}></OgImage>
+    <OgImage
+      siteURL={extractURL(event.description?.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]*>/g, '') ?? '')}
+    ></OgImage>
     <div>
       <Typography sx={{ fontWeight: 'bold' }}>{event.title || event.summary}</Typography>
     </div>
