@@ -20,7 +20,7 @@ const ShowEventData: React.FC<Props> = ({ event, sx }) => (
     <div>
       <Typography sx={{ fontWeight: 'bold' }}>🏢{event.location}</Typography>
     </div>
-    {event.location && (
+    {event.location && !event.location.startsWith('http') && (
       <iframe
         src={`https://maps.google.com/maps?q=${encodeURIComponent(event.location)}&output=embed`}
         width="100%"

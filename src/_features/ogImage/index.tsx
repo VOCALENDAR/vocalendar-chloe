@@ -22,6 +22,12 @@ const OgImage: React.FC<Props> = props => {
 
   return <OgImageComp imageURL={imageUrl}></OgImageComp>
 }
+const toAbsoluteURL = (url: string, baseURL: string): string => {
+  if (url.startsWith('http://') || url.startsWith('https://')) return url
+  const { origin } = new URL(baseURL)
+  return `${origin}${url.startsWith('/') ? '' : '/'}${url}`
+}
+
 const getImageURL = async (siteURL: string) => {
   console.log(siteURL)
   // Clientから他のURLはCOLSではじかれるのでCOLS Proxyを利用
@@ -32,17 +38,28 @@ const getImageURL = async (siteURL: string) => {
       throw new Error(response.statusText)
     }
     const document = new DOMParser().parseFromString(await response.text(), 'text/html')
-    const ogps = Array.from(document.querySelectorAll('head > meta'))
+    const metas = Array.from(document.querySelectorAll('head > meta'))
+    // ogpの取得
+    const ogps = metas
       .filter(n => n.hasAttribute('property'))
-      .reduce<Map<string, string>>((previous: Map<string, string>, current: Element) => {
+      .reduce<Map<string, string>>((previous, current) => {
         const property = current.getAttribute('property')?.trim()
-        if (property) {
-          previous.set(property, current.getAttribute('content') ?? '')
-        }
+        if (property) previous.set(property, current.getAttribute('content') ?? '')
         return previous
       }, new Map<string, string>())
-    return ogps.get('og:image')
-    return ''
+    const ogImage = ogps.get('og:image')
+
+    // ogpが無い場合にはTwitter Cardを取得
+    if (ogImage) return toAbsoluteURL(ogImage, siteURL)
+    const twitterCards = metas
+      .filter(n => n.hasAttribute('name'))
+      .reduce<Map<string, string>>((previous, current) => {
+        const name = current.getAttribute('name')?.trim()
+        if (name) previous.set(name, current.getAttribute('content') ?? '')
+        return previous
+      }, new Map<string, string>())
+    const twitterImage = twitterCards.get('twitter:image')
+    return twitterImage ? toAbsoluteURL(twitterImage, siteURL) : undefined
   })
   return url
 }
