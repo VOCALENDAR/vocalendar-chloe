@@ -204,16 +204,28 @@ const Home: React.FC<Props> = props => {
               setOpenSearchDialog(false)
               setSelectedEvent(undefined)
             }}
-            sx={{
-              width: `${drawerWidth}px`,
-            }}
+            sx={{ width: `${drawerWidth}px` }}
+            slotProps={{ paper: { sx: { borderRadius: '12px', my: '8px', mr: '8px', height: 'calc(100% - 16px)' } } }}
           >
             <Stack direction={'row'} sx={{ overflow: 'hidden' }}>
-              <Stack direction={'column'} spacing={2}>
+              <Stack direction={'column'} spacing={2} sx={{ m: 1 }}>
                 <SearchBox inputProps={{ sx: { fontSize: '1.5em', height: '2em', mr: -1, pl: '15px' } }} />
                 <SearchList />
               </Stack>
-              {selectedEvent && <ShowEventData event={selectedEvent} sx={{ overflow: 'auto', maxHeight: '100vh' }} />}
+              {selectedEvent && (
+                <ShowEventData
+                  event={selectedEvent}
+                  sx={{
+                    overflow: 'auto',
+                    maxHeight: '100vh',
+                    borderRadius: '12px',
+                    my: '8px',
+                    mr: '8px',
+                    p: 1,
+                    height: 'calc(100% - 16px)',
+                  }}
+                />
+              )}
             </Stack>
           </Drawer>
         </SearchTextProvider>
@@ -263,6 +275,7 @@ const Home: React.FC<Props> = props => {
           props.setShowEventData(undefined)
         }}
         sx={{ width: `${drawerWidth}px` }}
+        slotProps={{ paper: { sx: { borderRadius: '12px', my: '8px', mr: '8px', p: 1, height: 'calc(100% - 16px)' } } }}
       >
         {props.showEventData && <ShowEventData event={props.showEventData} />}
       </Drawer>

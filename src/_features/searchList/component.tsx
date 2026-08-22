@@ -27,7 +27,7 @@ const SearchListCompornent: React.FC<Props> = React.memo(function SearchBoxInner
       >
         <Stack direction={'column'} spacing={2}>
           {_props.events?.map((event, index) => (
-            <Paper key={index} sx={{ maxWidth: '600px' }}>
+            <Paper key={index} sx={{ maxWidth: '600px', borderRadius: '8px', overflow: 'hidden' }}>
               <div
                 onClick={() => {
                   setOpenSearchDeteil(true)
