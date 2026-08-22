@@ -3,7 +3,7 @@ import { Event } from '../app/types/event'
 
 interface searchListSelectedContextValue {
   selectedEvent: Event | undefined
-  setSelectedEvent: (event: Event) => void
+  setSelectedEvent: (event: Event | undefined) => void
 }
 
 const searchListSelectedContext = createContext<searchListSelectedContextValue | null>(null)

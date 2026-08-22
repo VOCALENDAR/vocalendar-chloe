@@ -35,6 +35,7 @@ const Home: React.FC<Props> = props => {
   const drawerWidth = '200px'
   const [isOpenSearchDialog, setOpenSearchDialog] = useState(false)
   const [isHideAllDays, setHideAllDays] = useState(false)
+  const { selectedEvent, setSelectedEvent } = useSearchListSelectedContext()
   return (
     <>
       <Box className="vocalendar-main">
@@ -180,31 +181,27 @@ const Home: React.FC<Props> = props => {
           onClick={() => setOpenSearchDialog(true)}
         ></Button>
         {/* 検索結果一覧 */}
-        <Drawer
-          anchor="right"
-          open={isOpenSearchDialog}
-          onClose={() => {
-            setOpenSearchDialog(false)
-          }}
-          sx={{
-            width: `${drawerWidth}px`,
-          }}
-        >
-          <SearchTextProvider>
+        <SearchTextProvider>
+          <Drawer
+            anchor="right"
+            open={isOpenSearchDialog}
+            onClose={() => {
+              setOpenSearchDialog(false)
+              setSelectedEvent(undefined)
+            }}
+            sx={{
+              width: `${drawerWidth}px`,
+            }}
+          >
             <Stack direction={'row'} sx={{ overflow: 'hidden' }}>
               <Stack direction={'column'} spacing={2}>
                 <SearchBox inputProps={{ sx: { fontSize: '1.5em', height: '2em', mr: -1, pl: '15px' } }} />
                 <SearchList />
               </Stack>
-              {useSearchListSelectedContext().selectedEvent && (
-                <ShowEventData
-                  event={useSearchListSelectedContext().selectedEvent!}
-                  sx={{ overflow: 'auto', maxHeight: '100vh' }}
-                />
-              )}
+              {selectedEvent && <ShowEventData event={selectedEvent} sx={{ overflow: 'auto', maxHeight: '100vh' }} />}
             </Stack>
-          </SearchTextProvider>
-        </Drawer>
+          </Drawer>
+        </SearchTextProvider>
         <FullCalendar
           ref={props.calendarRef}
           plugins={[dayGridPlugin, timeGridPlugin, integrationPlugIn]}
