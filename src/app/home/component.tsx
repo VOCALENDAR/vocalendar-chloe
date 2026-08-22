@@ -3,7 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import integrationPlugIn from '@fullcalendar/interaction'
 import FullCalendar from '@fullcalendar/react'
 import timeGridPlugin from '@fullcalendar/timegrid'
-import { Avatar, Box, Button, Drawer, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Button, Drawer, Menu, MenuItem, Stack, Typography } from '@mui/material'
 import { MouseEventHandler, useState } from 'react'
 import SearchBox from '../../_features/searchBox'
 import SearchList from '../../_features/searchList'
@@ -32,14 +32,29 @@ type Props = {
  */
 const Home: React.FC<Props> = props => {
   // TODO FullcalendarがAPIを2回発行するのでなんとかしたい
-  const drawerWidth = '200px'
+  const drawerWidth = '320px'
   const [isOpenSearchDialog, setOpenSearchDialog] = useState(false)
   const [isHideAllDays, setHideAllDays] = useState(false)
+  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null)
   const { selectedEvent, setSelectedEvent } = useSearchListSelectedContext()
   return (
     <>
       <Box className="vocalendar-main">
-        <Button variant="text" startIcon={<Avatar src={'./logo.vocalendar.png'} />}></Button>
+        <Button
+          variant="text"
+          startIcon={<Avatar src={'./logo.vocalendar.png'} />}
+          onClick={e => setMenuAnchor(e.currentTarget)}
+        ></Button>
+        <Menu
+          anchorEl={menuAnchor}
+          open={Boolean(menuAnchor)}
+          onClose={() => setMenuAnchor(null)}
+          slotProps={{ paper: { sx: { backgroundColor: '#f0f0f0', borderRadius: '8px' } } }}
+        >
+          <MenuItem onClick={() => setMenuAnchor(null)}>Vocalendarについて</MenuItem>
+          <MenuItem onClick={() => setMenuAnchor(null)}>Vocalendar編集メンバー</MenuItem>
+          <MenuItem onClick={() => setMenuAnchor(null)}>イベント登録依頼</MenuItem>
+        </Menu>
         <Typography
           sx={{ fontWeight: 'bold', fontSize: '1.7em', display: 'inline-block', verticalAlign: '-6px', width: '280px' }}
         >
