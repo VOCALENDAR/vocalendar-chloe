@@ -15,6 +15,7 @@ const OgImage: React.FC<Props> = props => {
   }
   const [imageUrl, setImageUrl] = useState<string>()
   useEffect(() => {
+    setImageUrl(undefined)
     ;(async () => {
       setImageUrl(await getImageURL(props.siteURL!))
     })()
